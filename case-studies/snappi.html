@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snappi & FinTech Learning Ecosystem — Nicoleta Malaki</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  .subnav{position:sticky;top:68px;background:var(--paper);border-bottom:0.5px solid var(--line);z-index:40;overflow-x:auto;}
+  .subnav .wrap{display:flex;gap:1.6rem;padding-top:.8rem;padding-bottom:.8rem;white-space:nowrap;}
+  .subnav a{font-family:var(--font-mono);font-size:.76rem;text-decoration:none;color:var(--slate);letter-spacing:.02em;}
+  .subnav a:hover{color:var(--ink);}
+  .part-block{border-left:2px solid var(--moss);padding-left:1.6rem;margin:1.6rem 0;}
+  .snapshot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin:1.6rem 0 3rem;}
+  .snapshot-grid div{border:0.5px solid var(--line);border-radius:8px;padding:1rem;}
+  .snapshot-grid .k{font-family:var(--font-mono);font-size:.68rem;color:var(--slate);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;}
+  @media(max-width:700px){.snapshot-grid{grid-template-columns:1fr 1fr;}}
+  .phase-card{border:0.5px solid var(--line);border-radius:8px;padding:1.4rem;margin-bottom:1rem;}
+  .phase-card h3{font-size:1.15rem;margin-bottom:.4rem;}
+  .shot-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.6rem 0;}
+  .shot-grid figure{margin:0;}
+  .shot-grid img{border:0.5px solid var(--line);border-radius:8px;width:100%;}
+  .shot-grid figcaption{font-size:.82rem;color:var(--slate);margin-top:.5rem;}
+  @media(max-width:640px){.shot-grid{grid-template-columns:1fr;}}
+  .filter-table{width:100%;border-collapse:collapse;font-size:.92rem;margin:1.2rem 0;}
+  .filter-table th,.filter-table td{text-align:left;padding:.6rem .8rem;border-bottom:0.5px solid var(--line);vertical-align:top;}
+  .filter-table th{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--slate);font-weight:400;}
+  .verdict{font-family:var(--font-mono);font-size:.72rem;padding:.15em .5em;border-radius:4px;white-space:nowrap;}
+  .verdict-as-is{background:var(--moss-bg);color:#2E4438;}
+  .verdict-adapted{background:var(--clay-bg);color:#6E2E22;}
+  .verdict-excluded{background:var(--slate-bg);color:#3E454C;}
+  .deliverable-card{border:0.5px solid var(--line);border-radius:8px;padding:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.8rem;}
+  .deliverable-card .name{font-size:.98rem;}
+  .deliverable-card .type{font-family:var(--font-mono);font-size:.7rem;color:var(--slate);display:block;margin-top:.2rem;}
+  .placeholder-block{border:0.5px dashed var(--line);border-radius:8px;padding:1.4rem;color:var(--slate);font-size:.92rem;}
+  .phase-card .phase-kicker{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--moss);margin:0 0 .5rem;font-weight:500;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Nicoleta Malaki</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects.html" aria-current="page">Projects</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="subnav" aria-label="Case study sections">
+  <div class="wrap">
+    <a href="#challenge">Challenge</a>
+    <a href="#learners">Learner analysis</a>
+    <a href="#strategy">Design strategy</a>
+    <a href="#part-a">Part A · Live event</a>
+    <a href="#part-b">Part B · Simulation</a>
+    <a href="#evolution">Evolution</a>
+    <a href="#deliverables">Deliverables</a>
+    <a href="#results">Results</a>
+    <a href="#reflection">Reflection</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <p class="wrap" style="font-size:.85rem;color:var(--slate);padding-top:1.5rem;">
+    <a href="../projects.html" style="text-decoration:underline;">← All projects</a>
+  </p>
+
+  <!-- PROJECT HERO -->
+  <section class="wrap" style="padding-top:1rem;padding-bottom:2rem;">
+    <span class="eyebrow">Flagship case study</span>
+    <h1>Snappi & FinTech Learning Ecosystem</h1>
+    <p class="lede">A blended learning ecosystem for Entrepreneurship Talks and Snappi Bank: a live, facilitator-led FinTech and startups event for 40 young adults, extended into an Articulate Storyline simulation and a post-event AI reflection coach.</p>
+    <div class="tags-row">
+      <span class="tag tag-skill">Learning design brief</span>
+      <span class="tag tag-skill">Learner persona development</span>
+      <span class="tag tag-skill">Experience blueprinting</span>
+      <span class="tag tag-skill">Instructional storyboarding</span>
+      <span class="tag tag-skill">Kirkpatrick evaluation design</span>
+      <span class="tag tag-tool">Articulate Storyline 360</span>
+      <span class="tag tag-modality">In-person event</span>
+      <span class="tag tag-modality">E-learning simulation</span>
+    </div>
+  </section>
+
+  <section class="wrap section-border" style="padding-bottom:0;">
+    <span class="eyebrow">Snapshot</span>
+    <h2 class="sr-only">Project snapshot</h2>
+    <div class="snapshot-grid">
+      <div><span class="k">Client</span>Entrepreneurship Talks, in collaboration with Snappi Bank</div>
+      <div><span class="k">Audience</span>~40 adults, 18–28, mixed prior experience</div>
+      <div><span class="k">Role</span>Instructional Designer / Learning Experience Designer</div>
+      <div><span class="k">Format</span>2–3 hour live event, single session</div>
+      <div><span class="k">Learning context</span>NGO-run entrepreneurship programme, extended into asynchronous e-learning and post-event AI coaching</div>
+      <div><span class="k">Deliverables</span>Design brief, experience blueprint, storyboard, Storyline simulation</div>
+      <div><span class="k">Frameworks</span>Andragogy, Gagné's Nine Events, Kolb, Bloom, modified Kirkpatrick</div>
+      <div><span class="k">Tools</span>Articulate Storyline 360, Notion</div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section class="wrap section-border" id="challenge">
+    <span class="eyebrow">The challenge</span>
+    <h2>Introducing FinTech and entrepreneurship to a skeptical, pragmatic audience</h2>
+    <p>Entrepreneurship Talks' mission is to promote entrepreneurship among young adults. This event was designed to support that mission directly: introducing participants to entrepreneurial thinking and to how FinTech is reshaping finance and business, in partnership with Snappi Bank.</p>
+    <p>The performance gap driving the brief was specific — many young adults are interested in entrepreneurship but lack exposure to authentic startup experiences, practical FinTech knowledge, and the confidence to engage with founders and industry professionals. The event needed to close that gap in a single 2–3 hour session, for a mixed audience with no assumed prior knowledge, where a panel-heavy format risked dominating the room and leaving little time for practice.</p>
+    <p>The brief also named the constraints plainly: limited time, a mixed-knowledge audience, a single session with no follow-up built in unless designed for, and the risk that participation would be uneven — particularly around networking, which is often the hardest part of an event like this for less confident participants.</p>
+  </section>
+
+  <!-- LEARNER ANALYSIS -->
+  <section class="wrap section-border" id="learners">
+    <span class="eyebrow">Learner analysis</span>
+    <h2>Who was in the room</h2>
+    <p>The audience was 18–28 year olds with genuinely mixed motivations — some already interested in entrepreneurship, others simply curious about innovation, career options, or technology. The brief characterized this cohort (Gen Z and the youngest millennials) as highly pragmatic, skeptical of traditional financial institutions, and carrying a high tolerance test for anything that sounded corporate or scripted. They were described as valuing vulnerability and messy startup stories over polish, focused on financial literacy, and inclined to see FinTech as survival infrastructure — crowdfunding, micro-loans, borderless neobanks — rather than as a trend.</p>
+    <p>Three color-coded personas ran through the design, from the live event's team formation through into the Storyline simulation's persona-lensed screens: the <strong>Aspiring Entrepreneur</strong>, motivated to develop and eventually launch ideas; the <strong>Curious Individual</strong>, interested in entrepreneurship without immediate plans to start a business; and the <strong>Tech Enthusiast</strong>, drawn to the innovation and FinTech angle specifically. Confidence and networking comfort varied across these personas — the Aspiring Entrepreneur, for example, was mapped as having lower networking confidence, which shaped how that persona's moments were written in the simulation.</p>
+    <p>The instructional implications were direct: content needed to earn credibility through authenticity rather than authority, activities needed to build confidence through low-stakes practice before higher-stakes moments like pitching, and anonymity or structure needed to lower the exposure risk for less confident participants without diluting participation.</p>
+  </section>
+
+  <!-- DESIGN STRATEGY -->
+  <section class="wrap section-border" id="strategy">
+    <span class="eyebrow">Design strategy</span>
+    <h2>From design principles to a four-phase journey</h2>
+    <p>Five design principles anchored every decision in the brief: authenticity over abstraction, participation over passive listening, reflection to strengthen transfer, networking treated as part of the learning (not an add-on), and confidence built through practice rather than told to participants.</p>
+    <p>The learning journey was mapped across four phases in the Experience Blueprint — arrival and orientation, hands-on practice, cross-team exchange and reflection, and extended networking — each phase tied to a specific learning outcome, a shift in the learner's psychological state, and observable evidence of success rather than a vague sense that "it went well."</p>
+    <p>Instructional theory was applied selectively rather than layered on for its own sake. Andragogy shaped the emphasis on early relevance, autonomy, and treating participants as bringing their own expertise into the room. Gagné's Nine Events structured the sequence within each phase — from gaining attention and activating prior knowledge through to eliciting performance and enhancing retention and transfer. Kolb's Experiential Learning Cycle shaped the phase-by-phase progression itself: concrete experience in the panel, active experimentation in the Startup Game, reflective observation in the World Café, and — by design — the retention-and-transfer stage was deliberately split across two separate mechanisms (the in-event Homecoming reflection, and the post-event Silo-Buster Digital Directory), rather than compressed into one moment.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>The Question Pool's anonymous, color-coded submission process was a specific rationale-driven choice: it democratized the room, primed active listening before the panel even began, and gave the design a live data point (submission and engagement rate) — while lowering the exposure risk for shyer participants who might not otherwise raise a hand.</p>
+    </div>
+  </section>
+
+  <!-- PART A: LIVE EVENT -->
+  <section class="wrap section-border" id="part-a">
+    <span class="eyebrow">Product A</span>
+    <h2>Part A · The live event</h2>
+    <p>The event ran as four phases, each built around a specific instructional purpose rather than simply a schedule of activities.</p>
+
+    <div class="part-block">
+      <div class="phase-card">
+        <p class="phase-kicker">Phase 1 — Arrival &amp; the expert panel</p>
+        <h3>Belonging before content</h3>
+        <p>Participants arrived to an anonymous Question Pool rather than a lecture. The expert panel that followed was deliberately built around authentic, unscripted storytelling — a "How–Why–What's Next" structure — rather than a polished presentation, on the reasoning that this audience's high skepticism responds to vulnerability, not authority. Questions submitted to the pool were surfaced back to the panel live, closing the loop so participation had a visible consequence rather than being symbolic.</p>
+      </div>
+      <div class="phase-card">
+        <p class="phase-kicker">Phase 2 — The Startup Game</p>
+        <h3>Active experimentation</h3>
+        <p>Cross-persona teams (blue, green, yellow) formed before any performance was required, building psychological safety ahead of the harder moments. Teams then applied a FinTech concept to a real-world sector problem, received real-time expert coaching modeled on workplace feedback, and delivered time-boxed elevator pitches evaluated by an expert panel — with a visible reward acting as an extrinsic motivator layered on top of the intrinsic learning already happening.</p>
+      </div>
+      <div class="phase-card">
+        <p class="phase-kicker">Phase 3 — World Café &amp; Homecoming</p>
+        <h3>Reflection through exchange</h3>
+        <p>An Ambassador from each team migrated to a different table to exchange ideas — surfacing variation and challenge that participants couldn't have generated inside their own team alone — before returning home to synthesize what they'd heard. This phase closes Kolb's cycle: reflection into conceptualization.</p>
+      </div>
+      <div class="phase-card">
+        <p class="phase-kicker">Phase 4 — Silo-Buster Directory &amp; informal networking</p>
+        <h3>Extending the connection beyond the room</h3>
+        <p>A digital directory addressed a networking gap the Learner Journey Map had surfaced directly, giving participants a concrete channel to continue a professional connection after the event ends, followed by unstructured networking time without facilitation pressure.</p>
+      </div>
+    </div>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Gamification in the Startup Game and Shark Feedback moments wasn't decoration — the rationale was that it drives low-friction collaboration, lets participants lead with their strengths through role-play, and flips the usual power structure between "expert" and "participant" long enough to make behavior observable to facilitators.</p>
+    </div>
+  </section>
+
+  <!-- PART B: SIMULATION -->
+  <section class="wrap section-border" id="part-b">
+    <span class="eyebrow">Product B</span>
+    <h2>Part B · The digital simulation</h2>
+    <p>Rather than attempting to reproduce the entire live event, four transformational moments were selected for adaptation into Articulate Storyline: the Panel, the Startup Game, the World Café, and the Silo-Buster Digital Directory. Each moment was mapped against the same five frameworks used in the live design — Andragogy, Gagné's Events, Bloom's Taxonomy, Kolb's stages, and a modified Kirkpatrick model — so the simulation stayed instructionally consistent with the event rather than becoming a separate product with its own logic.</p>
+
+    <h3 style="margin-top:2rem;">The transformation filter</h3>
+    <p>Every live activity was tested against one question: does this activity's value come from its content, or from live human presence and unpredictability? Content-driven activities translated into Storyline largely as-is. Presence-driven activities were adapted — rebuilt around branching, click-to-reveal, and drag-and-drop mechanics that preserved the instructional intent without pretending to replicate live spontaneity. A small number were excluded entirely where no digital equivalent could carry the original's meaning.</p>
+
+    <table class="filter-table">
+      <tr><th>Live activity</th><th>Verdict</th><th>Storyline equivalent</th></tr>
+      <tr><td>Authentic storytelling (panel)</td><td><span class="verdict verdict-as-is">As-is</span></td><td>Avatar dialogue in a large-room scene, audio-narrated where feasible</td></tr>
+      <tr><td>Live Q&A with experts</td><td><span class="verdict verdict-adapted">Adapted</span></td><td>Learner selects a question from the pool; avatar delivers a pre-scripted response</td></tr>
+      <tr><td>Team building</td><td><span class="verdict verdict-adapted">Adapted</span></td><td>Learner's role reframed from "team member" to "team assigner" — a directorial role achievable in Storyline</td></tr>
+      <tr><td>Elevator pitch, Shark Tank & reward</td><td><span class="verdict verdict-adapted">Adapted</span></td><td>Learner evaluates pitches against expert-revealed criteria and picks a winner, pushing the interaction into Bloom's "Evaluate" level rather than passive viewing</td></tr>
+      <tr><td>The notebook (physical deliverable)</td><td><span class="verdict verdict-excluded">Excluded</span></td><td>— its value came from being a single object carried across all three live phases; no digital equivalent preserved that continuity</td></tr>
+      <tr><td>Closing ritual</td><td><span class="verdict verdict-adapted">Adapted</span></td><td>Illustrated closing scene with persona-specific completion messages, preserving the symbolic function of visible, collective completion</td></tr>
+    </table>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>The Elevator Pitch screen was deliberately built so the learner forms their own judgment before seeing the experts' criteria, rather than being told the answer outright — combining the credibility of expert judgment with genuine learner agency, and asking more of the learner than passive observation would.</p>
+    </div>
+
+    <h3 style="margin-top:2.5rem;">From the build</h3>
+    <div class="shot-grid">
+      <figure>
+        <img src="assets/storyline-01-arrival.png" alt="Storyline screen showing the arrival lobby scene with participant avatars and a welcome message directing learners to check-in and the Question Pool.">
+        <figcaption>Arrival — the Question Pool is introduced before any content is delivered, establishing early participation.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/storyline-02-panel.png" alt="Storyline screen showing Snappi's CEO, COO, and Head of Product delivering an authentic, unscripted panel story about choosing to keep live human support over full automation.">
+        <figcaption>The Experts' Panel — authentic storytelling in place of a polished, corporate delivery.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/storyline-03-sharktank.png" alt="Storyline screen showing three teams' elevator pitches and a panel of shark-styled expert avatars revealing the criteria they judged pitches on.">
+        <figcaption>The Elevator Pitch & Shark Tank — learners weigh pitches against expert criteria before the experts' decision is revealed.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/storyline-04-closing.png" alt="Storyline closing scene showing all teams gathered with trophies raised and persona-specific completion messages in speech bubbles.">
+        <figcaption>The Closing Ritual — persona-specific completion messages mark the shift from live event into extended learning.</figcaption>
+      </figure>
+    </div>
+
+    <h3 style="margin-top:2.5rem;">Extending beyond the simulation</h3>
+    <p>The learning ecosystem doesn't end when the Storyline simulation closes. An <strong>AI Reflection Coach</strong> was designed as a further, intentionally separate extension — positioned after the event rather than during it, to support participants as they begin applying what they learned in real entrepreneurial situations. Its design rationale, conversational architecture, and behavioral principles are documented in full as a separate case study.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Positioning AI support after the event, rather than folding it into the live day, was intentional: entrepreneurial learning consolidates through reflection and application, not just through instruction, so the coach was built to meet participants at the point where they start using what they learned — not before.</p>
+    </div>
+
+    <p style="margin-top:1.5rem;"><a class="btn btn-quiet" href="ai-reflection-coach.html">Read the AI Reflection Coach case study →</a></p>
+  </section>
+
+  <!-- EVOLUTION -->
+  <section class="wrap section-border" id="evolution">
+    <span class="eyebrow">Evolution</span>
+    <h2>What changed between the live design and the build</h2>
+    <p>Documenting the transformation filter surfaced trade-offs that a straightforward "convert the event to e-learning" brief would have missed. Two examples stand out:</p>
+    <p><strong>Team formation</strong> could not be replicated as originally designed, since live team formation depends on physical presence, body language, and organic social bonding that Storyline can't simulate. Rather than approximating that with a false sense of realism, the learner's role was reframed entirely — from a team member experiencing formation to a team assigner directing it — which fit an achievable Storyline mechanic without pretending to be something it wasn't.</p>
+    <p><strong>The Elevator Pitch and Shark Tank</strong> moment could have been built as a simple pass/fail reveal. Instead, it was restructured so the learner forms an independent judgment first — selecting a winning team based on shared criteria — before finding out whether that judgment matched the experts'. This small change moved the interaction from Bloom's passive "Understand" level into "Evaluate," at the cost of slightly more build complexity.</p>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section class="wrap section-border" id="deliverables">
+    <span class="eyebrow">Deliverables</span>
+    <h2>What shipped</h2>
+
+    <div class="deliverable-card">
+      <div><span class="name">Learning Design Brief</span><span class="type">PDF · project overview, audience analysis, evaluation design</span></div>
+      <a class="btn btn-quiet" href="files/Learning-Design-Brief.pdf" download target="_blank" rel="noopener" aria-label="Download Learning Design Brief PDF">↓ Download PDF</a>
+    </div>
+    <div class="deliverable-card">
+      <div><span class="name">Experience Blueprint (Revised)</span><span class="type">PDF · four-phase journey, design rationale, evidence of success</span></div>
+      <a class="btn btn-quiet" href="files/Experience-Blueprint.pdf" download target="_blank" rel="noopener" aria-label="Download Experience Blueprint PDF">↓ Download PDF</a>
+    </div>
+    <div class="deliverable-card">
+      <div><span class="name">Instructional Storyboard — Final Polished Version</span><span class="type">PDF · transformation filter, screen-by-screen build spec</span></div>
+      <a class="btn btn-quiet" href="files/Instructional-Storyboard.pdf" download target="_blank" rel="noopener" aria-label="Download Instructional Storyboard PDF">↓ Download PDF</a>
+    </div>
+    <div class="deliverable-card">
+      <div><span class="name">Articulate Storyline simulation</span><span class="type">Interactive prototype</span></div>
+      <p style="color:var(--slate);font-size:.85rem;margin:0;">Representative screens from the build are shown above.</p>
+    </div>
+    <div class="deliverable-card">
+      <div><span class="name">AI Reflection Coach</span><span class="type">Part B · separate case study</span></div>
+      <a class="btn btn-quiet" href="ai-reflection-coach.html">View case study</a>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="wrap section-border" id="results">
+    <span class="eyebrow">Results</span>
+    <h2>What this project demonstrates</h2>
+    <p>This project demonstrates a fully reasoned, evidence-based approach to evaluation design — even though the event's actual outcome data has not yet been collected.</p>
+    <p>An evaluation framework was built into the design from the start, not added afterward: a modified Kirkpatrick model mapped each of the four levels to a specific event component and a specific data source — reaction to arrival engagement and poll participation, learning to pre- and post-session question quality, applied practice to facilitator observation during the Startup Game, and intent to transfer to self-reported next-step commitments in the closing notebook entry.</p>
+    <p>As a body of work, this project demonstrates a full instructional design cycle carried out in one connected system rather than in isolated pieces: a documented needs analysis and design brief, a learner-centred blueprint built on named theoretical rationale rather than intuition, a disciplined process for deciding what does and doesn't survive translation from a live to a digital format, and an evaluation plan tied to observable behavior rather than satisfaction alone.</p>
+    <div class="placeholder-block">
+      Post-event outcome data (actual reaction, learning, and behavior results) is not yet included here. This section will be updated with real results once the event has run and the evaluation data has been collected.
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <section class="wrap section-border" id="reflection">
+    <span class="eyebrow">Reflection</span>
+    <h2>What I'd carry forward</h2>
+    <p>Designing this project showed me just how challenging it is to transform meaningful learning experiences into an asynchronous simulation. Every design decision had to preserve the purpose and significance of the original event while creating an experience that learners could navigate independently. Achieving that required far more thought than I had initially expected.</p>
+    <p>What surprised me most throughout the process was how many disciplines instructional design brings together and how rewarding it is to see those decisions come to life. Even the simplest slide carries meaning. Every interaction communicates something to the learner, and as designers, we are responsible for ensuring that message is intentional and worthwhile.</p>
+    <p>More than anything, this project reinforced the responsibility instructional designers have to create meaningful learning experiences. Knowing that something I designed could genuinely help someone understand a concept, think differently, or experience learning in a memorable way is far more rewarding than simply producing a polished simulation.</p>
+    <p>Choosing a single design decision to highlight is difficult because every element contributes to the overall experience. However, if I had to choose one, it would be the World Café activity. I believe that meaningful learning often begins when learners step outside their comfort zones, encounter different perspectives, and reflect on what they have experienced. That principle shaped both the live event and its digital translation.</p>
+    <p>Finally, developing the three learner personas made me realise how differently people experience the same learning environment. That process sparked an interest in learner psychology that I had not expected and has encouraged me to think more deeply about designing learning experiences that are both meaningful and responsive to individual needs.</p>
+    <p>Looking back, this project taught me that instructional design is not simply about organising content or building interactions. It is about making thoughtful decisions that respect learners, create opportunities for meaningful reflection, and ultimately make learning worth experiencing.</p>
+  </section>
+
+  <section class="wrap" style="display:flex;justify-content:space-between;align-items:center;padding-top:2rem;">
+    <a class="btn btn-quiet" href="../projects.html">← All projects</a>
+    <a class="btn" href="ai-reflection-coach.html">Next project →</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Nicoleta Malaki</p>
+    <p><a href="../contact.html">Get in touch</a></p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

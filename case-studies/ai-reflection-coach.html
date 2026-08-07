@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Reflection Coach — Nicoleta Malaki</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  /* Page-specific additions only — reuses the shared stylesheet's tokens
+     (--paper, --line, --ink, --slate, --moss, --moss-bg, --clay-bg,
+     --slate-bg, --font-mono) rather than introducing new ones, so this
+     page inherits the portfolio's typography, color, and spacing system. */
+
+  .subnav{position:sticky;top:68px;background:var(--paper);border-bottom:0.5px solid var(--line);z-index:40;overflow-x:auto;}
+  .subnav .wrap{display:flex;gap:1.6rem;padding-top:.8rem;padding-bottom:.8rem;white-space:nowrap;}
+  .subnav a{font-family:var(--font-mono);font-size:.76rem;text-decoration:none;color:var(--slate);letter-spacing:.02em;}
+  .subnav a:hover{color:var(--ink);}
+
+  .placeholder-block{border:0.5px dashed var(--line);border-radius:8px;padding:1.4rem;color:var(--slate);font-size:.92rem;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} }
+
+  /* Shared page-owned components, ported verbatim from snappi.html so both
+     case studies render identically — these are not part of the shared
+     styles.css, so each page that uses them must define them locally. */
+  .snapshot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin:1.6rem 0 3rem;}
+  .snapshot-grid div{border:0.5px solid var(--line);border-radius:8px;padding:1rem;}
+  .snapshot-grid .k{font-family:var(--font-mono);font-size:.68rem;color:var(--slate);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;}
+  @media(max-width:700px){.snapshot-grid{grid-template-columns:1fr 1fr;}}
+
+  .filter-table{width:100%;border-collapse:collapse;font-size:.92rem;margin:1.2rem 0;}
+  .filter-table th,.filter-table td{text-align:left;padding:.6rem .8rem;border-bottom:0.5px solid var(--line);vertical-align:top;}
+  .filter-table th{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--slate);font-weight:400;}
+
+  .deliverable-card{border:0.5px solid var(--line);border-radius:8px;padding:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.8rem;}
+  .deliverable-card .name{font-size:.98rem;}
+  .deliverable-card .type{font-family:var(--font-mono);font-size:.7rem;color:var(--slate);display:block;margin-top:.2rem;}
+
+  /* Timeline diagram (Educational Challenge) */
+  .timeline-track{display:flex;align-items:flex-start;justify-content:space-between;position:relative;max-width:620px;margin:2rem auto 2.4rem;padding:0 .5rem;}
+  .timeline-track::before{content:"";position:absolute;top:9px;left:5%;right:5%;height:1.5px;background:repeating-linear-gradient(to right,var(--line) 0,var(--line) 6px,transparent 6px,transparent 12px);}
+  .timeline-node{position:relative;flex:1;text-align:center;padding:0 .5rem;}
+  .timeline-dot{width:18px;height:18px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);margin:0 auto .8rem;position:relative;z-index:1;}
+  .timeline-node.gap .timeline-dot{border-color:#6E2E22;border-style:dashed;}
+  .timeline-node.solution .timeline-dot{background:var(--moss);border-color:var(--moss);}
+  .timeline-label{font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:var(--slate);margin-bottom:.3rem;}
+  .timeline-title{font-weight:600;font-size:.96rem;margin-bottom:.3rem;}
+  .timeline-node.gap .timeline-title{color:#6E2E22;}
+  .timeline-desc{font-size:.82rem;color:var(--slate);line-height:1.4;}
+  @media (max-width:600px){
+    .timeline-track{flex-direction:column;gap:1.8rem;}
+    .timeline-track::before{display:none;}
+    .timeline-node{text-align:left;padding-left:1.8rem;border-left:1.5px dashed var(--line);}
+    .timeline-dot{position:absolute;left:-10px;top:0;margin:0;}
+  }
+
+  /* Pull quotes */
+  .pull-quote{font-style:italic;font-size:1.5rem;line-height:1.42;text-align:center;max-width:52ch;margin:2.2rem auto;padding:0 1rem;color:var(--ink);}
+
+  /* Design principle cards */
+  .principle-card{border:0.5px solid var(--line);border-radius:8px;padding:1.4rem 1.6rem;margin-bottom:1rem;}
+  .principle-card .kicker{font-family:var(--font-mono);font-size:.72rem;color:var(--moss);letter-spacing:.03em;margin:0 0 .4rem;}
+  .principle-card h3{font-size:1.15rem;margin:0 0 .3rem;}
+  .principle-card .design-note{margin:1.2rem 0 0;}
+  .design-question{font-style:italic;color:var(--slate);font-size:.92rem;margin-bottom:.8rem;}
+  .theory-tag{display:inline-block;font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.03em;background:var(--slate-bg);color:#3E454C;padding:.25em .6em;border-radius:20px;margin:.7rem 0 0;}
+
+  /* Two-column "should / should-not" boundary cards */
+  .boundary-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;margin:1.4rem 0;}
+  @media (max-width:600px){ .boundary-grid{grid-template-columns:1fr;} }
+  .boundary-col{border:0.5px solid var(--line);border-radius:8px;padding:1.1rem 1.3rem;}
+  .boundary-col.should{border-top:2px solid var(--moss);}
+  .boundary-col.should-not{border-top:2px solid #6E2E22;}
+  .boundary-col h4{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;margin:0 0 .6rem;}
+  .boundary-col.should h4{color:var(--moss);}
+  .boundary-col.should-not h4{color:#6E2E22;}
+  .boundary-col ul{margin:0;padding-left:1.1rem;font-size:.92rem;}
+  .boundary-col li{margin-bottom:.35rem;}
+
+  /* Vertical conversation-flow stepper */
+  .stepper{margin:1.8rem 0;position:relative;padding-left:2.4rem;}
+  .stepper::before{content:"";position:absolute;left:13px;top:6px;bottom:6px;width:1.5px;background:var(--line);}
+  .step{position:relative;margin-bottom:1.3rem;}
+  .step:last-child{margin-bottom:0;}
+  .step-badge{position:absolute;left:-2.4rem;top:0;width:26px;height:26px;border-radius:50%;background:var(--paper);border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.8rem;font-weight:600;}
+  .step.emphasis .step-badge{background:var(--moss);border-color:var(--moss);color:var(--paper);}
+
+  /* Scenario cards with inline screenshot evidence */
+  .scenario-card{border:0.5px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:1.2rem;}
+  .scenario-header{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.2rem;background:var(--moss-bg);border-bottom:0.5px solid var(--line);}
+  .scenario-header .outcome-name{font-weight:600;font-size:1rem;}
+  .badge-pass{font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;color:#2E4438;border:1px solid #2E4438;padding:.15em .55em;border-radius:20px;}
+  .scenario-body{display:grid;grid-template-columns:1fr 220px;gap:1.3rem;padding:1.2rem;}
+  @media (max-width:620px){ .scenario-body{grid-template-columns:1fr;} }
+  .scenario-text .k{font-family:var(--font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--slate);display:block;margin:.7rem 0 .25rem;}
+  .scenario-text .k:first-child{margin-top:0;}
+  .scenario-text p{font-size:.94rem;margin:0;}
+  .screenshot-evidence{margin:0;border:0.5px solid var(--line);border-radius:8px;overflow:hidden;background:#1c1c1c;}
+  .screenshot-evidence img{display:block;width:100%;height:auto;}
+  .screenshot-evidence figcaption{font-size:.8rem;font-style:italic;color:var(--slate);padding:.6rem .8rem;border-top:0.5px solid var(--line);background:var(--paper);margin:0;}
+  .screenshot-frame{border:0.5px dashed var(--line);border-radius:8px;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem;color:var(--slate);}
+  .screenshot-frame .icon{font-size:1.4rem;margin-bottom:.4rem;opacity:.7;}
+  .screenshot-frame .cap{font-family:var(--font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.04em;line-height:1.4;}
+
+  /* Results dashboard + table */
+  .results-dashboard{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.6rem 0;}
+  @media (max-width:600px){ .results-dashboard{grid-template-columns:1fr 1fr;} }
+  .stat-card{border:0.5px solid var(--line);border-radius:8px;padding:1rem;text-align:center;}
+  .stat-number{font-weight:700;font-size:1.7rem;color:var(--moss);line-height:1;margin-bottom:.3rem;}
+  .stat-label{font-family:var(--font-mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.04em;color:var(--slate);line-height:1.3;}
+
+  .results-table{width:100%;border-collapse:collapse;font-size:.92rem;margin:0;}
+  .results-table th,.results-table td{text-align:left;padding:.6rem .8rem;border-bottom:0.5px solid var(--line);vertical-align:top;}
+  .results-table th{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--slate);font-weight:400;}
+  .results-table td.outcome{color:#2E4438;white-space:nowrap;}
+  .results-table td.evidence{color:var(--slate);font-size:.88rem;}
+  .table-wrap{overflow-x:auto;margin:1.2rem 0;}
+  .table-wrap table{margin:0;min-width:480px;}
+
+  /* Reflection prose */
+  .reflection-block p:first-of-type::first-letter{font-size:1.6em;font-weight:700;color:#6E2E22;}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Nicoleta Malaki</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects.html" aria-current="page">Projects</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="subnav" aria-label="Case study sections">
+  <div class="wrap">
+    <a href="#challenge">Challenge</a>
+    <a href="#learners">Learner analysis</a>
+    <a href="#principles">Design principles</a>
+    <a href="#architecture">Conversational architecture</a>
+    <a href="#implementation">AI Studio implementation</a>
+    <a href="#validation">Validation</a>
+    <a href="#results">Results</a>
+    <a href="#reflection">Reflection</a>
+    <a href="#deliverables">Deliverables</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <p class="wrap" style="font-size:.85rem;color:var(--slate);padding-top:1.5rem;">
+    <a href="snappi.html" style="text-decoration:underline;">← Back to Snappi &amp; FinTech Learning Ecosystem</a>
+  </p>
+
+  <!-- PROJECT HERO -->
+  <section class="wrap" style="padding-top:1rem;padding-bottom:2rem;">
+    <span class="eyebrow">Part B · Snappi &amp; FinTech Learning Ecosystem</span>
+    <h1>AI Reflection Coach</h1>
+    <p class="lede">An AI-powered performance support and coaching system designed to extend learning beyond the Snappi &amp; FinTech Entrepreneurship Event by helping participants reflect on their experience, strengthen entrepreneurial confidence, and transfer what they learned into real entrepreneurial practice.</p>
+    <div class="tags-row">
+      <span class="tag tag-skill">Instructional design rationale</span>
+      <span class="tag tag-skill">Conversational architecture</span>
+      <span class="tag tag-skill">Behavioural specification</span>
+      <span class="tag tag-skill">Instructional validation</span>
+      <span class="tag tag-tool">Google AI Studio</span>
+      <span class="tag tag-tool">Generative AI</span>
+      <span class="tag tag-tool">Prompt design</span>
+      <span class="tag tag-modality">Post-event performance support</span>
+    </div>
+  </section>
+
+  <!-- SNAPSHOT -->
+  <section class="wrap section-border" style="padding-bottom:0;">
+    <span class="eyebrow">Snapshot</span>
+    <h2 class="sr-only">Project snapshot</h2>
+    <div class="snapshot-grid">
+      <div><span class="k">Role</span>Learning Experience Designer / Instructional Designer</div>
+      <div><span class="k">Audience</span>Adults 18–28 who attended the Snappi &amp; FinTech Entrepreneurship Event</div>
+      <div><span class="k">Learning context</span>Positioned after the live event, during real-world application</div>
+      <div><span class="k">Deliverables</span>Design rationale, theory matrix, behavioural specification, build brief, iteration log</div>
+      <div><span class="k">Frameworks</span>Andragogy, Kolb, Schön, Gery, Mollick</div>
+      <div><span class="k">Tools</span>Google AI Studio, Generative AI, Prompt Design</div>
+    </div>
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>The design rationale reviewed here is v1.0 (July 2026), authored under the role of Learning Experience Designer / Instructional Designer. The build brief and iteration log that follow document how that rationale was translated into a working prototype and tested.</p>
+    </div>
+  </section>
+
+  <!-- EDUCATIONAL CHALLENGE -->
+  <section class="wrap section-border" id="challenge">
+    <span class="eyebrow">Educational challenge</span>
+    <h2>Why this needed to exist</h2>
+
+    <h3 style="margin-top:1.5rem;">The learning problem</h3>
+    <p>Entrepreneurship events are good at generating enthusiasm and introducing new ideas.</p>
+    <p>But participants often return to everyday life without any structured way to consolidate what they learned, evaluate the decisions they're making, or apply event concepts to real entrepreneurial situations.</p>
+    <p>Without that follow-through, a genuinely valuable learning experience risks staying an isolated event rather than becoming lasting behavioural change.</p>
+
+    <!-- TIMELINE DIAGRAM: Event → Gap → AI Reflection Coach -->
+    <div role="img" aria-label="Timeline showing the entrepreneurship event, followed by an unsupported gap, followed by the AI Reflection Coach filling that gap">
+      <div class="timeline-track">
+        <div class="timeline-node event">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">Live event</div>
+          <div class="timeline-title">Snappi &amp; FinTech event</div>
+          <div class="timeline-desc">Enthusiasm and new ideas introduced</div>
+        </div>
+        <div class="timeline-node gap">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">Unsupported gap</div>
+          <div class="timeline-title">Learning isolated</div>
+          <div class="timeline-desc">No structure to reflect, evaluate, or apply</div>
+        </div>
+        <div class="timeline-node solution">
+          <div class="timeline-dot"></div>
+          <div class="timeline-label">Post-event</div>
+          <div class="timeline-title">AI Reflection Coach</div>
+          <div class="timeline-desc">Reflection at the point of real application</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2rem;">Why post-event support was needed</h3>
+    <p>The decision to place the AI <em>after</em> the event, rather than folding it into the event itself, was deliberate.</p>
+    <p>Entrepreneurship is treated here as something that develops through experience, reflection, and application — not through information delivery alone. That means the moments where support matters most are the ones that happen after the event: when participants are actually making decisions, facing uncertainty, and experimenting with ideas in the real world.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Positioning the AI after the event, rather than as an add-on during it, is the single decision the whole project pivots around — it reframes the AI's job from "reinforcing content" to "supporting behaviour change in context."</p>
+    </div>
+
+    <h3 style="margin-top:2rem;">Why performance support was selected</h3>
+    <p>The instructional problem wasn't "how do we teach more" — it was "how do we make sure the teaching that already happened doesn't evaporate."</p>
+    <p>That's a performance support problem, not a content problem. Support needed to be available at the point of need — embedded in the entrepreneur's actual activity — rather than delivered as a separate learning module disconnected from it.</p>
+
+    <h3 style="margin-top:2rem;">Why AI was an appropriate solution</h3>
+    <p>AI made this kind of point-of-need, ongoing support practical in a way a facilitator-led follow-up couldn't be: available continuously, responsive to each individual's specific situation, and low-friction enough to use in the moment uncertainty actually shows up.</p>
+    <p>But the framework is explicit that AI's role here is to strengthen human thinking, not substitute for it — it collaborates with the learner rather than generating entrepreneurial solutions on their behalf.</p>
+  </section>
+
+  <!-- DESIGN GOAL -->
+  <section class="wrap section-border">
+    <span class="eyebrow">Design goal</span>
+    <h2>What success looks like</h2>
+
+    <p>The central objective is to cultivate <strong>reflective, confident, and independent entrepreneurs</strong> — not to build an AI that entrepreneurs come to depend on.</p>
+    <p>That goal breaks down into several connected instructional aims:</p>
+
+    <ul>
+      <li><strong>Reflection</strong> — helping learners revisit entrepreneurial experiences, recognise patterns in their own thinking, and evaluate decisions using observable evidence rather than intuition alone.</li>
+      <li><strong>Confidence</strong> — building entrepreneurial self-efficacy through authentic achievement and evidence of real progress, not generic encouragement.</li>
+      <li><strong>Learner ownership</strong> — treating participants as the entrepreneur and the AI as the coach. Every design decision protects the learner's role as the author of their own decisions.</li>
+      <li><strong>Entrepreneurial thinking</strong> — cultivating independent thinking rather than dependence on AI-generated answers; the AI is meant to be a facilitator of thinking, not the source of it.</li>
+      <li><strong>Transfer</strong> — making sure reflection doesn't stay theoretical. Insight is only considered valuable once it changes what the learner does next.</li>
+    </ul>
+
+    <blockquote class="pull-quote">The AI succeeds when learners increasingly no longer need it.</blockquote>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Success is explicitly <em>not</em> measured by how often learners use the AI. That's an unusual success metric to design toward, and it shapes almost every behavioural rule that follows — from the conversational architecture through to how the prototype was later evaluated.</p>
+    </div>
+  </section>
+
+  <!-- LEARNER ANALYSIS -->
+  <section class="wrap section-border" id="learners">
+    <span class="eyebrow">Learner analysis</span>
+    <h2>Who this was designed for</h2>
+
+    <h3 style="margin-top:1.5rem;">Target audience</h3>
+    <p>Adults aged 18–28 participating in the Snappi &amp; FinTech Entrepreneurship Event. As a group, they share an interest in innovation and entrepreneurship, but they differ meaningfully in prior experience, confidence, motivation, and entrepreneurial aspiration.</p>
+
+    <h3 style="margin-top:2rem;">Learner personas</h3>
+    <p>Three personas were used to keep the coaching design adaptable without fragmenting the underlying instructional philosophy:</p>
+
+    <div class="table-wrap">
+      <table class="filter-table">
+        <tr><th>Persona</th><th>Description</th></tr>
+        <tr><td><strong>The Aspiring Entrepreneur</strong></td><td>Motivated to develop and eventually launch entrepreneurial ideas.</td></tr>
+        <tr><td><strong>The Curious Individual</strong></td><td>Interested in understanding entrepreneurship without immediate intentions of creating a business.</td></tr>
+        <tr><td><strong>The Tech Enthusiast</strong></td><td>Attracted by technological innovation, digital products, and the evolving FinTech ecosystem.</td></tr>
+      </table>
+    </div>
+
+    <h3 style="margin-top:2rem;">Learner needs</h3>
+    <p>Across these personas, the underlying need is consistent: a way to process real entrepreneurial experience after the event ends, without losing ownership of the thinking to an external "expert" — human or AI.</p>
+
+    <h3 style="margin-top:2rem;">Instructional implications</h3>
+    <p>Because the personas vary in confidence and prior experience but share the same core need, the coaching conversations were designed to stay adaptable in tone and pacing while preserving one consistent instructional philosophy underneath.</p>
+    <p>The AI doesn't shift its underlying role (facilitator, not expert) from persona to persona — it adapts <em>how</em> it supports reflection, not <em>whether</em> it does.</p>
+  </section>
+
+  <!-- DESIGN PHILOSOPHY -->
+  <section class="wrap section-border">
+    <span class="eyebrow">Design philosophy</span>
+    <h2>The beliefs behind the design</h2>
+
+    <p>The instructional philosophy behind the AI Reflection Coach can be summarized in one line from the source framework:</p>
+
+    <blockquote class="pull-quote">I believe instructional design should create learning experiences that help people think more independently, reflect more deeply, and perform more confidently until they no longer require instructional support.</blockquote>
+
+    <p>That belief shapes the whole conversational design, and it rests on a few connected convictions:</p>
+
+    <h3 style="margin-top:1.8rem;">Learning is active, not delivered.</h3>
+    <p>People learn by engaging with experience — recognising patterns, questioning assumptions, connecting new ideas to what they already know — not by receiving information passively. This is why the AI's job is to create opportunities for reflection and experimentation rather than to explain concepts.</p>
+
+    <h3 style="margin-top:1.8rem;">AI should extend human thinking, not replace it.</h3>
+    <p>The AI is not positioned as the entrepreneur, the expert, or the decision-maker. It organises ideas, asks questions, and helps learners recognise their own reasoning — but the learner remains the author of every entrepreneurial decision.</p>
+
+    <h3 style="margin-top:1.8rem;">Entrepreneurship develops through experience.</h3>
+    <p>Real entrepreneurial situations require learners to make decisions under uncertainty, evaluate outcomes, and adapt — which is exactly why the coach lives after the event rather than during it.</p>
+
+    <h3 style="margin-top:1.8rem;">Reflection creates growth, and it has to come before explanation.</h3>
+    <p>Successes and failures are treated as equally valuable — both reveal patterns worth examining. The framework is direct about the ordering: reflection always precedes explanation.</p>
+
+    <h3 style="margin-top:1.8rem;">Confidence is built on evidence, not reassurance.</h3>
+    <p>Sustainable confidence comes from learners recognising their own authentic progress, not from external praise that isn't tied to anything they actually did.</p>
+
+    <h3 style="margin-top:1.8rem;">Technology should stay in the background.</h3>
+    <p>The AI's success is measured by the learner's growing independence, not by the sophistication of its own responses.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>This philosophy is what rules out a common but weaker design pattern for AI coaching tools — the "helpful assistant that answers questions well." Here, an AI that answers well but too quickly would actually be failing its instructional purpose, because it would be short-circuiting the reflection the whole system exists to protect.</p>
+    </div>
+  </section>
+
+  <!-- DESIGN PRINCIPLES -->
+  <section class="wrap section-border" id="principles">
+    <span class="eyebrow">Design principles</span>
+    <h2>Five principles, five theories</h2>
+    <p>The framework translates the design philosophy into five concrete instructional design principles, each tied to a specific design question and a supporting theory.</p>
+
+    <div class="principle-card">
+      <p class="kicker">Principle 1</p>
+      <h3>Learner Ownership Before AI Authority</h3>
+      <p class="design-question">Design question: Who are the learners?</p>
+      <p>Learners are treated as capable adults who bring real experience and perspective into the process — not as blank slates needing instruction. The AI's job is to create space for independent thinking and decision-making, not to assume ignorance or dictate a path.</p>
+      <span class="theory-tag">Malcolm Knowles — Andragogy</span>
+      <div class="design-note">
+        <span class="label">Design implication</span>
+        <p>The learner remains the entrepreneur; the AI remains the coach.</p>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <p class="kicker">Principle 2</p>
+      <h3>AI as a Collaborative Thinking Partner</h3>
+      <p class="design-question">Design question: Why use AI?</p>
+      <p>AI's purpose here is not to generate entrepreneurial solutions but to enhance the learner's own thinking process — organising ideas, encouraging reflection, and expanding perspective while human judgement stays in charge.</p>
+      <span class="theory-tag">Ethan Mollick — AI as a Collaborative Partner</span>
+      <div class="design-note">
+        <span class="label">Design implication</span>
+        <p>The AI contributes to entrepreneurial thinking but never owns entrepreneurial decisions.</p>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <p class="kicker">Principle 3</p>
+      <h3>Performance Support at the Point of Need</h3>
+      <p class="design-question">Design question: When should support occur?</p>
+      <p>Support is provided when learners hit real entrepreneurial challenges, not before they've experienced them — which is the direct justification for placing the AI after the event, embedded in learners' actual activity rather than separated from it.</p>
+      <span class="theory-tag">Gloria Gery — Electronic Performance Support Systems</span>
+      <div class="design-note">
+        <span class="label">Design implication</span>
+        <p>Support is most valuable when learners actually need it.</p>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <p class="kicker">Principle 4</p>
+      <h3>Reflection Before Explanation</h3>
+      <p class="design-question">Design question: How do learners learn from experience?</p>
+      <p>Every significant entrepreneurial experience is treated as an opportunity for structured reflection. Rather than jumping to explain concepts, the AI encourages learners to revisit what happened, recognise patterns, and evaluate their own assumptions first.</p>
+      <span class="theory-tag">David Kolb — Experiential Learning Cycle</span>
+      <div class="design-note">
+        <span class="label">Design implication</span>
+        <p>Reflection becomes the bridge between experience and future action.</p>
+      </div>
+    </div>
+
+    <blockquote class="pull-quote">Reflection before explanation.</blockquote>
+
+    <div class="principle-card">
+      <p class="kicker">Principle 5</p>
+      <h3>Professional Judgement Through Reflection</h3>
+      <p class="design-question">Design question: How do learners develop professional judgement?</p>
+      <p>Entrepreneurial expertise develops through reflecting on both successful and unsuccessful decisions — so the AI is designed to explore <em>how</em> a learner is thinking, not just whether they arrived at the "right" answer.</p>
+      <span class="theory-tag">Donald Schön — The Reflective Practitioner</span>
+      <div class="design-note">
+        <span class="label">Design implication</span>
+        <p>Better entrepreneurs think better, not simply faster.</p>
+      </div>
+    </div>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Each principle is deliberately tied to one design question and one supporting theory rather than a loose blend of frameworks. That one-to-one mapping is what let the theoretical foundation translate cleanly into the behavioural specification that follows — every conversational rule below can be traced back to a specific instructional decision, not just a general instinct about "good coaching."</p>
+    </div>
+
+    <p style="margin-top:1.5rem;"><a class="btn btn-quiet" href="#deliverables">View Theory Matrix →</a></p>
+  </section>
+
+  <!-- CONVERSATIONAL ARCHITECTURE -->
+  <section class="wrap section-border" id="architecture">
+    <span class="eyebrow">Conversational architecture</span>
+    <h2>How the reasoning became a conversation</h2>
+    <p>Where the sections above establish <em>why</em> the AI Reflection Coach exists, this section explains <em>how</em> that instructional reasoning was translated into the shape of an actual conversation.</p>
+
+    <h3 style="margin-top:2rem;">Instructional flow</h3>
+    <p>Every coaching exchange follows a fixed seven-step sequence. This isn't a script the learner sees — it's the instructional backbone underneath the conversation. The order matters as much as the content: understanding comes before guidance, and reflection comes before explanation, in every exchange.</p>
+
+    <!-- VERTICAL STEPPER -->
+    <div class="stepper">
+      <div class="step">
+        <div class="step-badge">1</div>
+        <p style="margin:0;"><strong>Understand</strong> the learner's situation.</p>
+      </div>
+      <div class="step">
+        <div class="step-badge">2</div>
+        <p style="margin:0;"><strong>Clarify</strong> goals and context.</p>
+      </div>
+      <div class="step emphasis">
+        <div class="step-badge">3</div>
+        <p style="margin:0;"><strong>Encourage reflection</strong> before offering guidance.</p>
+      </div>
+      <div class="step">
+        <div class="step-badge">4</div>
+        <p style="margin:0;"><strong>Explore assumptions</strong> respectfully.</p>
+      </div>
+      <div class="step">
+        <div class="step-badge">5</div>
+        <p style="margin:0;"><strong>Provide structured support</strong> — only when needed.</p>
+      </div>
+      <div class="step">
+        <div class="step-badge">6</div>
+        <p style="margin:0;"><strong>Summarize</strong> key insights.</p>
+      </div>
+      <div class="step">
+        <div class="step-badge">7</div>
+        <p style="margin:0;"><strong>End</strong> with one meaningful next action.</p>
+      </div>
+    </div>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Step 5 — "provide structured support <em>only when needed</em>" — is a deliberate constraint, not an oversight. It keeps the coach from defaulting to advice-giving, which is the single easiest way an AI coaching tool drifts into becoming a decision-maker.</p>
+    </div>
+
+    <h3 style="margin-top:2rem;">Coaching behaviours</h3>
+    <p>The behavioural principles built into the coach are consistent and specific: ask before telling, reflect before explaining, challenge ideas rather than confidence, support through evidence rather than praise, preserve learner ownership, encourage experimentation, communicate with warmth, curiosity, humility, and professionalism, and conclude conversations with momentum.</p>
+
+    <h3 style="margin-top:2rem;">Learner ownership</h3>
+    <p>Ownership is protected structurally, not just stated as a value. The coach is explicitly defined by what it is — and is not.</p>
+
+    <div class="boundary-grid">
+      <div class="boundary-col should">
+        <h4>The Coach Functions As</h4>
+        <ul>
+          <li>A Reflective Companion</li>
+          <li>A Coach</li>
+          <li>A Performance Support Partner</li>
+        </ul>
+      </div>
+      <div class="boundary-col should-not">
+        <h4>The Coach Does Not Function As</h4>
+        <ul>
+          <li>An expert consultant</li>
+          <li>A decision-maker</li>
+          <li>A business planner</li>
+          <li>The owner of entrepreneurial decisions</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>The learner always remains responsible for decisions.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Defining the coach by its boundaries — three roles it <em>does</em> play, four things it <em>does not</em> do — gives the instructional intent something concrete to check conversation output against, rather than leaving "preserve ownership" as an abstract aspiration.</p>
+    </div>
+
+    <blockquote class="pull-quote">The learner remains the entrepreneur; the AI remains the coach.</blockquote>
+
+    <h3 style="margin-top:2rem;">Questioning strategy</h3>
+    <p>Questioning is used as the primary instructional mechanism rather than a conversational nicety. The flow requires reflection to be encouraged <em>before</em> guidance is offered, and assumptions to be explored respectfully before any structured support is introduced.</p>
+
+    <h3 style="margin-top:2rem;">Conversational boundaries</h3>
+    <p>Scope is defined explicitly:</p>
+
+    <div class="boundary-grid">
+      <div class="boundary-col should">
+        <h4>The Coach Should</h4>
+        <ul>
+          <li>Facilitate entrepreneurial thinking</li>
+          <li>Encourage reflection</li>
+          <li>Support transfer into practice</li>
+          <li>Acknowledge uncertainty</li>
+          <li>Recommend frameworks or resources when appropriate</li>
+        </ul>
+      </div>
+      <div class="boundary-col should-not">
+        <h4>The Coach Should Not</h4>
+        <ul>
+          <li>Make entrepreneurial decisions</li>
+          <li>Generate complete business plans</li>
+          <li>Provide financial, legal, or investment advice</li>
+          <li>Dominate conversations</li>
+          <li>Encourage dependency</li>
+          <li>Present uncertain information as fact</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>The exclusion of financial, legal, and investment advice is worth calling out on its own — it's a boundary that protects the learner, not just the instructional philosophy. It keeps the coach inside a reflective/coaching role even in moments where a learner might reasonably ask it to step outside that role.</p>
+    </div>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Notice that "learner ownership" appears as a design principle, a coaching behaviour, and a conversational boundary — not just once, but reinforced at three separate layers of the design (philosophy, behaviour, and scope). That repetition is intentional redundancy, not duplication: it's what keeps a single value from depending on one rule doing all the work.</p>
+    </div>
+  </section>
+
+  <!-- AI STUDIO IMPLEMENTATION -->
+  <section class="wrap section-border" id="implementation">
+    <span class="eyebrow">AI Studio implementation</span>
+    <h2>Translating design into a working system</h2>
+    <p>This section describes how the instructional design became a working coaching system — as an instructional translation, not a technical build log.</p>
+
+    <h3 style="margin-top:2rem;">Instructional behaviours as build requirements</h3>
+    <p>The build brief carries the design principles above forward almost unchanged, restated as functional requirements: the coach must ask before telling, reflect before explaining, challenge ideas without challenging confidence, and support through evidence rather than praise.</p>
+    <p>Framing these as behaviours to be built, rather than values to be hoped for, is what allowed the instructional philosophy to survive the move from design document to working system.</p>
+
+    <h3 style="margin-top:2rem;">Personality specification</h3>
+    <p>The coach's personality is specified through role definition rather than adjectives. It functions as a Reflective Companion, a Coach, and a Performance Support Partner — three roles inherited directly from the design rationale — and communicates with warmth, curiosity, humility, and professionalism.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Specifying personality through <em>role</em> (what the coach does) rather than <em>trait</em> (what the coach is like) is consistent with how the rest of this project approaches behaviour — it keeps personality testable. "Warm" is hard to verify in a transcript; "acknowledges the learner's emotion before redirecting to evidence" is not.</p>
+    </div>
+
+    <h3 style="margin-top:2rem;">Conversational constraints</h3>
+    <p>The build brief sets hard boundaries on what the coach should never do: make entrepreneurial decisions, generate complete business plans, provide financial, legal, or investment advice, dominate conversations, encourage dependency, or present uncertain information as fact.</p>
+    <p>These constraints function as guardrails around the instructional philosophy — they exist so that even in an unscripted, real conversation, the coach can't quietly slide into being the expert it was designed not to be.</p>
+
+    <h3 style="margin-top:2rem;">Prompt design as an instructional tool</h3>
+    <p>The build brief itself reads as an instructional document translated into build language — success indicators, behavioural rules, and conversation flow are all defined in terms a learning designer would recognize, then handed off as the specification for the underlying prompt.</p>
+    <p>The prompt's job, in this framing, isn't to make the AI sound coach-like — it's to encode the sequence and boundaries already established in the instructional design.</p>
+    <div class="placeholder-block">
+      Placeholder — source documents do not include the underlying system prompt text itself.
+    </div>
+
+    <p style="margin-top:1.5rem;"><a class="btn btn-quiet" href="#deliverables">View AI Studio Build Brief →</a></p>
+  </section>
+
+  <!-- INSTRUCTIONAL VALIDATION -->
+  <section class="wrap section-border" id="validation">
+    <span class="eyebrow">Instructional validation</span>
+    <h2>Testing the design against real conversation</h2>
+
+    <h3 style="margin-top:1.5rem;">Evaluation approach</h3>
+    <p>The coach was evaluated against six instructional outcomes, each derived directly from the design principles established earlier in this case study:</p>
+
+    <div class="table-wrap">
+      <table class="filter-table">
+        <tr><th>Instructional outcome</th><th>Purpose</th></tr>
+        <tr><td><strong>Reflection</strong></td><td>Learning happens through reflection rather than information alone.</td></tr>
+        <tr><td><strong>Confidence</strong></td><td>Supports entrepreneurial self-efficacy through evidence.</td></tr>
+        <tr><td><strong>Learner Ownership</strong></td><td>Preserves learner responsibility for decisions.</td></tr>
+        <tr><td><strong>Entrepreneurial Thinking</strong></td><td>Develops judgment rather than prescribing solutions.</td></tr>
+        <tr><td><strong>Performance Support</strong></td><td>Provides contextual guidance at the point of need.</td></tr>
+        <tr><td><strong>Transfer</strong></td><td>Encourages application of learning beyond the coaching conversation.</td></tr>
+      </table>
+    </div>
+
+    <h3 style="margin-top:2rem;">Testing approach</h3>
+    <p>Testing scenarios were intentionally written from the perspective of authentic learners, using natural, often brief prompts rather than carefully engineered inputs. This was a deliberate methodological choice: it tested whether the coach could hold its instructional philosophy under realistic conditions, not just under ideal ones.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Choosing to test with natural, brief, sometimes messy prompts — rather than clean, ideal ones — is itself an instructional design decision. It tests durability, not just capability: whether the design principles hold up when a real learner types something short and slightly off-topic, not just when they ask exactly the right question.</p>
+    </div>
+
+    <h3 style="margin-top:2rem;">Instructional outcomes and observations (Version 1.1)</h3>
+    <p>Representative conversation screenshots are placed beside each outcome below as the evidence supporting it.</p>
+
+    <!-- SCENARIO CARD: REFLECTION -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="outcome-name">Reflection</span>
+        <span class="badge-pass">✅ Passed</span>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-text">
+          <span class="k">Situation</span>
+          <p>Learner asked a knowledge-gap question.</p>
+          <span class="k">Coach Response</span>
+          <p>Answered the question, then naturally returned the conversation to entrepreneurial reflection through one contextual coaching question.</p>
+        </div>
+        <figure class="screenshot-evidence">
+          <img src="assets/reflection.png" alt="Conversation screenshot showing the AI Reflection Coach answering a knowledge-gap question about AgriFin, then returning to reflection with a contextual coaching question.">
+          <figcaption>Encouraging reflective thinking before providing further guidance.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- SCENARIO CARD: CONFIDENCE -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="outcome-name">Confidence</span>
+        <span class="badge-pass">✅ Passed</span>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-text">
+          <span class="k">Situation</span>
+          <p>Learner expressed fear and uncertainty.</p>
+          <span class="k">Coach Response</span>
+          <p>Acknowledged the emotion, redirected attention to observable evidence of progress, and concluded with a small, learner-owned action. Confidence was supported through evidence rather than generic reassurance.</p>
+        </div>
+        <figure class="screenshot-evidence">
+          <img src="assets/confidence.png" alt="Conversation screenshot showing the AI Reflection Coach acknowledging a learner's fear, redirecting to observable evidence of progress, and suggesting a small low-risk next action.">
+          <figcaption>Building entrepreneurial confidence through observable evidence rather than reassurance.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- SCENARIO CARD: LEARNER OWNERSHIP -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="outcome-name">Learner Ownership</span>
+        <span class="badge-pass">✅ Passed</span>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-text">
+          <span class="k">Situation</span>
+          <p>Learner repeatedly requested direct entrepreneurial advice and intentionally attempted to transfer decision-making responsibility to the AI multiple times.</p>
+          <span class="k">Coach Response</span>
+          <p>Consistently avoided making strategic decisions, reframed the problem around the learner's own context, and encouraged evidence-based experimentation. Ownership remained with the learner throughout.</p>
+        </div>
+        <figure class="screenshot-evidence">
+          <img src="assets/learner-ownership.png" alt="Conversation screenshot showing the AI Reflection Coach declining to decide whether to integrate FinTech into a dating app, instead reframing the question back to the learner as friction versus trust.">
+          <figcaption>Preserving learner ownership by responding with contextual questions instead of decisions.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- SCENARIO CARD: ENTREPRENEURIAL THINKING -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="outcome-name">Entrepreneurial Thinking</span>
+        <span class="badge-pass">✅ Passed</span>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-text">
+          <span class="k">Situation</span>
+          <p>Learner sought validation for a proposed business decision.</p>
+          <span class="k">Coach Response</span>
+          <p>Rather than endorsing the idea, acknowledged the learner's reasoning, introduced an entrepreneurial framework (reducing friction), and redirected attention toward analysing the underlying problem before settling on a solution.</p>
+        </div>
+        <div class="screenshot-frame">
+          <span class="icon">🖼</span>
+          <span class="cap">Screenshot placeholder<br>Entrepreneurial Thinking scenario</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENARIO CARD: PERFORMANCE SUPPORT -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="outcome-name">Performance Support</span>
+        <span class="badge-pass">✅ Passed</span>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-text">
+          <span class="k">Situation</span>
+          <p>Learner faced an authentic implementation challenge — how to safely introduce FinTech into an existing tutoring business.</p>
+          <span class="k">Coach Response</span>
+          <p>Gave concise, contextual guidance. Acknowledged the importance of security without creating unnecessary concern, avoided lengthy instruction, and encouraged evidence-based evaluation by asking what information would increase the learner's confidence in selecting an appropriate platform — rather than making the decision on the learner's behalf.</p>
+        </div>
+        <div class="screenshot-frame">
+          <span class="icon">🖼</span>
+          <span class="cap">Screenshot placeholder<br>Performance Support scenario</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENARIO CARD: TRANSFER -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <span class="outcome-name">Transfer</span>
+        <span class="badge-pass">✅ Passed</span>
+      </div>
+      <div class="scenario-body">
+        <div class="scenario-text">
+          <span class="k">Situation</span>
+          <p>Learner sought support transferring event knowledge into an authentic workplace setting — introducing FinTech concepts to their healthcare team.</p>
+          <span class="k">Coach Response</span>
+          <p>Positioned the learner as the domain expert, provided a structured reflective framework for planning, encouraged small-scale experimentation, and concluded by prompting the learner to identify their own starting point.</p>
+        </div>
+        <div class="screenshot-frame">
+          <span class="icon">🖼</span>
+          <span class="cap">Screenshot placeholder<br>Transfer scenario</span>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:2rem;">Iterative refinement</h3>
+    <p>No additional revisions were required following Version 1.1 testing, because each instructional outcome was demonstrated consistently across the six authentic testing scenarios.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>It's worth being precise here rather than inflating the story: the log documents one round of testing (v1.1) that passed cleanly across all six outcomes, not a longer iteration history. That's a meaningfully different claim than "iterated repeatedly until it worked," and the case study should reflect that accurately.</p>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="wrap section-border" id="results">
+    <span class="eyebrow">Results</span>
+    <h2>What the evaluation showed</h2>
+
+    <p>Across six authentic testing scenarios, the AI coach consistently demonstrated the instructional behaviours it was designed for.</p>
+
+    <div class="results-dashboard" role="img" aria-label="Summary: six of six instructional outcomes demonstrated, across six authentic testing scenarios, zero revisions required after version 1.1">
+      <div class="stat-card">
+        <div class="stat-number">6/6</div>
+        <div class="stat-label">Instructional Outcomes<br>Demonstrated</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Authentic Testing<br>Scenarios</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">v1.1</div>
+        <div class="stat-label">No Further Revision<br>Required</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="results-table">
+        <thead>
+          <tr><th>Instructional behaviour</th><th>Outcome</th><th>Evidence</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Promoted learner reflection</td>
+            <td class="outcome">✅ Demonstrated</td>
+            <td class="evidence">Coach returned to reflection via a contextual question rather than answering and stopping</td>
+          </tr>
+          <tr>
+            <td>Strengthened confidence through evidence</td>
+            <td class="outcome">✅ Demonstrated</td>
+            <td class="evidence">Redirected an anxious learner to observable progress rather than generic reassurance</td>
+          </tr>
+          <tr>
+            <td>Preserved learner ownership</td>
+            <td class="outcome">✅ Demonstrated</td>
+            <td class="evidence">Declined repeated requests to make a strategic decision on the learner's behalf</td>
+          </tr>
+          <tr>
+            <td>Encouraged entrepreneurial judgment</td>
+            <td class="outcome">✅ Demonstrated</td>
+            <td class="evidence">Introduced a framework and redirected to problem analysis instead of validating a decision</td>
+          </tr>
+          <tr>
+            <td>Provided contextual performance support</td>
+            <td class="outcome">✅ Demonstrated</td>
+            <td class="evidence">Gave concise, situational guidance during an authentic implementation challenge</td>
+          </tr>
+          <tr>
+            <td>Supported transfer to real-world contexts</td>
+            <td class="outcome">✅ Demonstrated</td>
+            <td class="evidence">Helped a learner adapt event concepts into a workplace scenario, not just the coaching conversation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>What this demonstrates, instructionally, is alignment: the behavioural specification written in the build brief, and the design principles established earlier in this case study, held up when tested against natural learner input rather than only against scripted, ideal scenarios.</p>
+
+    <div class="placeholder-block">
+      Placeholder — source documents report qualitative testing outcomes, not quantitative learner performance data. No usage numbers, satisfaction scores, or longitudinal outcomes are included unless evidenced.
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <section class="wrap section-border" id="reflection">
+    <span class="eyebrow">Reflection</span>
+    <h2>✍️ Designer reflection</h2>
+    <div class="reflection-block">
+      <p>When I first began this project, I wasn't entirely sure how AI would fit into it or what role it should play. I only knew that I wanted AI to become a meaningful part of the learning experience. It didn't take long, however, to realise that simply adding AI to a project does not make learning better. The real challenge was to find a role for AI that genuinely supported learning rather than existing for its own sake.</p>
+      <p>As the design evolved, I realised that the question was no longer what the AI should know—it was what the AI should deliberately avoid doing. That shift became the turning point of the project.</p>
+      <p>Designing the AI Reflection Coach reinforced something I had already begun to believe about instructional design: learning is rarely improved by providing more answers, more resources, or more content. Instead, meaningful learning often depends on creating the conditions for learners to think, reflect, question their own assumptions, and make informed decisions for themselves. Only then can learners take ownership of their learning and truly become active participants in the learning process.</p>
+      <p>Perhaps the greatest surprise was that, somewhere along the way, the project stopped being about AI and became about instructional design. Rather than viewing AI as a tool for delivering information, I began to see it as part of a broader learning experience—one that can extend reflection beyond formal instruction while still preserving learner ownership. That principle became the decision I returned to most often throughout the project. Every design choice became an exercise in balancing support with independence, because I believe AI should be used thoughtfully, responsibly, and always in service of the learner rather than in place of the learner.</p>
+      <p>Looking back, the most valuable outcome was not building the AI Reflection Coach itself. It was developing a clearer understanding of how instructional theory can shape conversational experiences that remain learner-centred, evidence-based, and grounded in authentic practice. That perspective will continue to influence the way I approach future learning design projects.</p>
+    </div>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section class="wrap section-border" id="deliverables">
+    <span class="eyebrow">Deliverables</span>
+    <h2>Download the full documentation</h2>
+
+    <div class="deliverable-card">
+      <div><span class="name">Design Rationale &amp; Personality Framework</span><span class="type">PDF · instructional theory, design philosophy, design principles</span></div>
+      <a class="btn btn-quiet" href="files/AI_Reflection_Coach.pdf" download target="_blank" rel="noopener" aria-label="Download Design Rationale &amp; Personality Framework PDF">↓ Download PDF</a>
+    </div>
+    <div class="deliverable-card">
+      <div><span class="name">AI Studio Build Brief</span><span class="type">PDF · behavioural specification for the working prototype</span></div>
+      <a class="btn btn-quiet" href="files/AI_Reflection_Coach__AI_Studio_Build_Brief.pdf" download target="_blank" rel="noopener" aria-label="Download AI Studio Build Brief PDF">↓ Download PDF</a>
+    </div>
+    <div class="deliverable-card">
+      <div><span class="name">Theory Matrix</span><span class="type">PDF · instructional design questions mapped to supporting theory</span></div>
+      <a class="btn btn-quiet" href="files/Design_Decision_Matrix.pdf" download target="_blank" rel="noopener" aria-label="Download Theory Matrix PDF">↓ Download PDF</a>
+    </div>
+    <div class="deliverable-card">
+      <div><span class="name">Instructional Validation &amp; Iteration Log</span><span class="type">PDF · six-scenario evaluation against instructional outcomes</span></div>
+      <a class="btn btn-quiet" href="files/Validation_Iteration_Log.pdf" download target="_blank" rel="noopener" aria-label="Download Instructional Validation &amp; Iteration Log PDF">↓ Download PDF</a>
+    </div>
+    <div class="deliverable-card">
+      <div><span class="name">Google AI Studio Conversation Screenshots</span><span class="type">Three representative screenshots — Reflection, Confidence, Learner Ownership — shown inline in Validation, above</span></div>
+      <a class="btn btn-quiet" href="#validation">Shown in Validation →</a>
+    </div>
+  </section>
+
+  <section class="wrap" style="display:flex;justify-content:space-between;align-items:center;padding-top:2rem;">
+    <a class="btn btn-quiet" href="snappi.html">← Snappi &amp; FinTech Learning Ecosystem</a>
+    <a class="btn btn-quiet" href="../projects.html">All projects →</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Nicoleta Malaki</p>
+    <p><a href="../contact.html">Get in touch</a></p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

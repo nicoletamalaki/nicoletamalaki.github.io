@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Confidence Curriculum — Nicoleta Malaki</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  .subnav{position:sticky;top:68px;background:var(--paper);border-bottom:0.5px solid var(--line);z-index:40;overflow-x:auto;}
+  .subnav .wrap{display:flex;gap:1.6rem;padding-top:.8rem;padding-bottom:.8rem;white-space:nowrap;}
+  .subnav a{font-family:var(--font-mono);font-size:.76rem;text-decoration:none;color:var(--slate);letter-spacing:.02em;}
+  .subnav a:hover{color:var(--ink);}
+  .snapshot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin:1.6rem 0 3rem;}
+  .snapshot-grid div{border:0.5px solid var(--line);border-radius:8px;padding:1rem;}
+  .snapshot-grid .k{font-family:var(--font-mono);font-size:.68rem;color:var(--slate);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;}
+  @media(max-width:700px){.snapshot-grid{grid-template-columns:1fr 1fr;}}
+
+  /* Ported from the other case studies so this page renders consistently —
+     these components live in each page's local block, not the shared stylesheet. */
+  .filter-table{width:100%;border-collapse:collapse;font-size:.92rem;margin:1.2rem 0;}
+  .filter-table th,.filter-table td{text-align:left;padding:.6rem .8rem;border-bottom:0.5px solid var(--line);vertical-align:top;}
+  .filter-table th{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--slate);font-weight:400;}
+  .table-wrap{overflow-x:auto;margin:1.2rem 0;}
+  .table-wrap table{margin:0;min-width:420px;}
+
+  .deliverable-card{border:0.5px solid var(--line);border-radius:8px;padding:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.8rem;flex-wrap:wrap;}
+  .deliverable-card .name{font-size:.98rem;}
+  .deliverable-card .type{font-family:var(--font-mono);font-size:.7rem;color:var(--slate);display:block;margin-top:.2rem;}
+
+  /* Restrained sequence component, matching the "My Learning Chain" pattern
+     already established on the About page — same tokens, same visual language. */
+  .sequence-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .7rem;font-family:var(--font-mono);font-size:.85rem;letter-spacing:.02em;color:var(--ink-soft);margin:1rem 0 1.6rem;}
+  .sequence-row .arrow{color:var(--slate);}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Nicoleta Malaki</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects.html" aria-current="page">Projects</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="subnav" aria-label="Case study sections">
+  <div class="wrap">
+    <a href="#challenge">Challenge</a>
+    <a href="#thinking">Design thinking</a>
+    <a href="#solution">Solution</a>
+    <a href="#deliverables">Final deliverables</a>
+    <a href="#evolution">Evolution</a>
+    <a href="#outcome">Outcome / evidence</a>
+    <a href="#reflection">Reflection</a>
+  </div>
+</div>
+
+<main id="main">
+
+  <p class="wrap" style="font-size:.85rem;color:var(--slate);padding-top:1.5rem;">
+    <a href="../projects.html" style="text-decoration:underline;">← All projects</a>
+  </p>
+
+  <section class="wrap" style="padding-top:1rem;padding-bottom:2rem;">
+    <span class="eyebrow">Case study · Supporting project</span>
+    <h1>Building Confidence: Effective Communication Strategies for Employers and Recruiters</h1>
+    <p class="lede">A 43-topic, two-part facilitator-led curriculum on professional communication and public speaking for young adults navigating job-seeking and early-stage entrepreneurship. The original seminar concept was mine; this case study documents how it became a structured curriculum for Entrepreneurship Talks.</p>
+    <div class="tags-row">
+      <span class="tag tag-skill">Curriculum architecture</span>
+      <span class="tag tag-skill">Facilitator guide design</span>
+      <span class="tag tag-tool">43-topic framework</span>
+      <span class="tag tag-modality">Facilitator-led workshop</span>
+    </div>
+  </section>
+
+  <section class="wrap section-border" style="padding-bottom:0;">
+    <span class="eyebrow">Snapshot</span>
+    <h2 class="sr-only">Project snapshot</h2>
+    <div class="snapshot-grid">
+      <div><span class="k">Client</span>Entrepreneurship Talks</div>
+      <div><span class="k">Audience</span>Job seekers &amp; early entrepreneurs, 18–30</div>
+      <div><span class="k">Role</span>Learning Experience Designer / Facilitator</div>
+      <div><span class="k">Scope</span>43 topics across 2 curricula</div>
+      <div><span class="k">Status</span>Manager-approved</div>
+    </div>
+  </section>
+
+  <!-- CHALLENGE -->
+  <section class="wrap section-border" id="challenge">
+    <span class="eyebrow">The challenge</span>
+    <h2>Two different confidence gaps, one shared blind spot</h2>
+    <p>The seminar's audience — 18 to 30 year olds navigating what developmental psychologist Jeffrey Arnett calls "emerging adulthood" — isn't one uniform group. The problem statement documented for this project names two recurring patterns within it. <strong>Career Seekers</strong> often have real, demonstrable ability, but present it with a lack of confidence that undersells what they can actually do. <strong>Early Venturers</strong> face a different problem: without a title or organisation behind them, they struggle to describe their own offer clearly and to sound credible talking about their own business. Traditional corporate communication training tends to assume one context — an existing employer, an existing role — and misses both patterns.</p>
+    <p>That's also why the curriculum was split into two parts rather than one: professional communication (aimed more at the Career Seeker pattern) and public speaking (aimed more at the Early Venturer pattern), sharing a single instructional structure so the two curricula stay coherent with each other rather than becoming two unrelated products.</p>
+    <p>The documentation also situates the problem in a wider context. European Commission research (Eurobarometer, 2023) found that 46% of young Europeans aged 15–30 say they would consider starting a business, but only 9% have actually done so. That gap is useful as context for why this kind of communication training matters to this age group — it isn't evidence of what this particular curriculum achieved, and I've been careful throughout this case study to keep that distinction clear.</p>
+    <p>The seminar concept itself started as my own idea. Developing it into a structured, 43-topic curriculum for Entrepreneurship Talks was the instructional design problem this case study documents.</p>
+  </section>
+
+  <!-- DESIGN THINKING -->
+  <section class="wrap section-border" id="thinking">
+    <span class="eyebrow">Design thinking</span>
+    <h2>Structuring 43 topics across two curricula</h2>
+    <p>The central design problem was consistency without repetition: 43 topics needed a shared instructional architecture so the curriculum felt coherent rather than assembled ad hoc — but a single repeated structure, applied 43 times, risks feeling mechanical or interchangeable well before the learner reaches topic 40.</p>
+    <p>Every topic follows the same seven-step sequence:</p>
+
+    <div class="sequence-row" role="img" aria-label="The seven-part topic structure: Definition, then Scenario, then Myth versus Reality, then Key Takeaway, then Activity, then Entrepreneurship Link, then Confidence Compass.">
+      <span>Definition</span><span class="arrow">→</span>
+      <span>Scenario</span><span class="arrow">→</span>
+      <span>Myth vs Reality</span><span class="arrow">→</span>
+      <span>Key Takeaway</span><span class="arrow">→</span>
+      <span>Activity</span><span class="arrow">→</span>
+      <span>Entrepreneurship Link</span><span class="arrow">→</span>
+      <span>Confidence Compass</span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="filter-table">
+        <tr><th>Step</th><th>Purpose</th></tr>
+        <tr><td><strong>Definition</strong></td><td>A clear, jargon-free introduction to the concept.</td></tr>
+        <tr><td><strong>Scenario</strong></td><td>A running persona makes the concept concrete rather than abstract.</td></tr>
+        <tr><td><strong>Myth vs Reality</strong></td><td>Confronts a common misconception the learner likely already holds.</td></tr>
+        <tr><td><strong>Key Takeaway</strong></td><td>One memorable, quotable line to anchor the topic.</td></tr>
+        <tr><td><strong>Activity</strong></td><td>Structured, psychologically safe practice.</td></tr>
+        <tr><td><strong>Entrepreneurship Link</strong></td><td>Ties the skill to venture-building, not just general "career advice."</td></tr>
+        <tr><td><strong>Confidence Compass</strong></td><td>A reflection question turned inward, closing the topic.</td></tr>
+      </table>
+    </div>
+
+    <p>The repetition is deliberate — it's what makes 43 topics learnable as a set rather than 43 separate things to relearn. What keeps that repetition from feeling flat is that two of the seven steps are built to vary by design: the Scenario step runs a single persona across every topic, so the learner is following one continuous, evolving character rather than a new hypothetical stranger each time; and the Entrepreneurship Link step ties each topic to a different specific venture-building context, so the "same" structure is doing different work depending on what the topic is actually about.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>Definition is deliberately placed before Activity, not the other way round — the structure moves from a clear concept to guided application before asking the learner to attempt anything unsupported, following the logic of Vygotsky's scaffolding: support is highest early and steps back as competence builds within the topic.</p>
+    </div>
+
+    <h3 style="margin-top:2rem;">Four design pillars</h3>
+    <p>Underneath the seven-step structure sit four recurring mechanisms that show up across activities, regardless of topic:</p>
+
+    <div class="table-wrap">
+      <table class="filter-table">
+        <tr><th>Pillar</th><th>What it does</th></tr>
+        <tr><td><strong>Objective self-evidence</strong></td><td>Activities ask learners to document real strengths they can point to, rather than complete a vague self-assessment.</td></tr>
+        <tr><td><strong>Controlled vulnerability</strong></td><td>The Myth vs Reality step gently challenges an existing belief, rather than confronting it head-on.</td></tr>
+        <tr><td><strong>Micro-action testing</strong></td><td>Activities ask for small, low-stakes stretches outside the learner's comfort zone, not large ones.</td></tr>
+        <tr><td><strong>Behavioural reframing</strong></td><td>Shifts the question a learner is implicitly asking from "Am I good enough?" toward "What is my strategy?"</td></tr>
+      </table>
+    </div>
+
+    <h3 style="margin-top:2rem;">Designing for different starting points</h3>
+    <p>Learners don't arrive at the same confidence level, so the curriculum was built against three learner personas drawn from the same audience research behind the Snappi &amp; FinTech flagship project — reused here because the underlying confidence patterns were already well understood, not because the audiences are identical.</p>
+
+    <div class="table-wrap">
+      <table class="filter-table">
+        <tr><th>Persona</th><th>Confidence pattern</th></tr>
+        <tr><td><strong>Aspiring Entrepreneur</strong></td><td>Has the underlying knowledge but lacks real-world exposure, which tends to produce mediocre confidence.</td></tr>
+        <tr><td><strong>Curious Individual</strong></td><td>Starts from a low baseline and some skepticism — typically the lowest starting point in the room.</td></tr>
+        <tr><td><strong>Tech Enthusiast</strong></td><td>Digitally fluent and often overconfident on the surface, which can mask real underlying vulnerability.</td></tr>
+      </table>
+    </div>
+
+    <p>The design anticipates that these three patterns won't move through the seminar the same way — the Aspiring Entrepreneur and Curious Individual are expected to dip before they rise as the Myth vs Reality steps unsettle assumptions they're holding, while the Tech Enthusiast is expected to move more steadily throughout. This is a design expectation built into how activities are sequenced and differentiated, not a measured result — no learner confidence data has been collected to confirm it plays out this way in practice.</p>
+    <p>In line with that, the curriculum is written to support confidence development rather than promise it: activities create opportunities to practise in a structured, lower-stakes setting, and the Confidence Compass step is designed to help learners recognise evidence of their own progress rather than simply be told they've improved. The aim throughout is to create conditions in which confidence and self-efficacy may develop — not to guarantee that they will.</p>
+
+    <h3 style="margin-top:2rem;">Instructional decisions and their grounding</h3>
+    <div class="table-wrap">
+      <table class="filter-table">
+        <tr><th>Decision</th><th>Grounded in</th></tr>
+        <tr><td>Framework design — definition before application</td><td>Vygotsky's scaffolding and Zone of Proximal Development</td></tr>
+        <tr><td>Authentic practice — real scenarios, adult-to-adult tone</td><td>Kolb's experiential learning + Knowles' andragogy</td></tr>
+        <tr><td>Reflection before advice — the Confidence Compass</td><td>Schön's reflective practice + Whitmore's GROW model</td></tr>
+        <tr><td>Safety before challenge — inclusive activity design</td><td>Bandura's self-efficacy theory</td></tr>
+        <tr><td>Entrepreneurship as the lens, not generic "career" framing</td><td>Audience-specific relevance to this cohort</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="wrap section-border" id="solution">
+    <span class="eyebrow">The solution</span>
+    <h2>Design goals document and the full curriculum</h2>
+    <p>The curriculum exists as two connected pieces of documentation. The design goals document holds the rationale — the theoretical grounding and structural decisions that explain why the seven-step structure is built the way it is. The full workshop and facilitation material for all 43 topics is consolidated into a single 49-page curriculum document, kept available on request rather than published openly.</p>
+    <p>The two are meant to be read together — the design goals document for understanding or adapting the approach, the full curriculum for running it.</p>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section class="wrap section-border" id="deliverables">
+    <span class="eyebrow">Final deliverables</span>
+    <h2>What shipped</h2>
+
+    <div class="deliverable-card">
+      <div><span class="name">Design Goals &amp; Curriculum Framework</span><span class="type">PDF · rationale, theoretical grounding, and structural decisions</span></div>
+      <a class="btn btn-quiet" href="files/Building_Confidence_Professional_Communication_Strategies_for_Recruiters__Employers.pdf" download target="_blank" rel="noopener" aria-label="Download the Building Confidence Design Goals document PDF">↓ Download PDF</a>
+    </div>
+    <div class="deliverable-card">
+      <div><span class="name">Full curriculum</span><span class="type">49-page consolidated document · 43 topics across 2 curricula — available on request</span></div>
+      <a class="btn btn-quiet" href="../contact.html">Get in touch →</a>
+    </div>
+  </section>
+
+  <!-- EVOLUTION -->
+  <section class="wrap section-border" id="evolution">
+    <span class="eyebrow">Evolution</span>
+    <h2>An iterative loop, not a straight line</h2>
+    <p>The framework and overall workshop structure were established once, early, and held steady after that. Everything below that level moved in a repeated loop: AI-supported drafting and revision, topic by topic, with reflection built into every activity rather than treated as a separate step, and research brought in as needed for the problem statement and design goals sections.</p>
+    <p>Claude was used as a brainstorming and drafting partner in that loop — not a replacement for judgement. I set the framework, the values, and the intended outcomes; AI helped draft and stress-test individual topics against them. Every inconsistency that surfaced was corrected through human review, not assumed correct because AI had produced it.</p>
+
+    <div class="design-note">
+      <span class="label">Design note</span>
+      <p>One concrete example: an early AI-drafted activity was structured in a way that unintentionally excluded quieter participants — it rewarded speaking up first rather than giving everyone a comparable way in. Catching that wasn't automatic; it came from reviewing the draft against the inclusive-design intent behind the seven-step structure, and the activity was revised before it went into the guide.</p>
+    </div>
+  </section>
+
+  <!-- OUTCOME / EVIDENCE -->
+  <section class="wrap section-border" id="outcome">
+    <span class="eyebrow">Outcome / evidence</span>
+    <h2>What's documented, and what isn't yet</h2>
+    <p>It's worth being precise about what this section can and can't claim.</p>
+    <p><strong>What's documented as project evidence:</strong> the full 43-topic, two-curriculum framework was completed, applying a consistent seven-part structure throughout; the design was reviewed and is manager-approved; and the drafting process included a working example of an issue being caught and corrected through human review rather than assumed correct.</p>
+    <p><strong>What isn't yet available:</strong> no learner outcome data — confidence measures, facilitator observation notes, participant feedback, or evidence of behavioural change — has been collected or documented for this curriculum. Manager approval and a completed, applied framework are evidence that the project was finished and accepted; they are not evidence of what happened for learners who go through it. I'm stating that plainly rather than filling the gap with a number that doesn't exist.</p>
+    <p>Two honest limitations are worth naming here rather than glossing over. First, by linking confidence and communication skill so directly to entrepreneurial outcomes, the curriculum risks implying they're the main barrier to venture success — when capital, timing, and market conditions matter just as much, and the seminar doesn't address any of those. Second, the Confidence Compass — the reflection step I'd point to as the most distinctive part of the design — asks learners to name their own weaknesses honestly, which is genuinely difficult even inside a psychologically safer activity structure. That's a real limitation of the design, not a solved problem.</p>
+  </section>
+
+  <!-- REFLECTION -->
+  <section class="wrap section-border" id="reflection">
+    <span class="eyebrow">Reflection</span>
+    <h2>What I'd carry forward</h2>
+    <p>Building Confidence is particularly meaningful to me because the original idea for the seminar was my own. I have always considered confidence an important part of how people approach challenges—not only in entrepreneurship or professional communication, but in many areas of life. Confidence can change perspective, influence how someone presents themselves, and give them the willingness to act toward a goal.</p>
+    <p>Designing this curriculum, however, made me think more carefully about what it means to design for confidence. It cannot simply be encouraged or assumed. Learners arrive with different experiences, different levels of self-belief, and different comfort levels with communication. A learning experience therefore needs to create opportunities for people to practise, reflect, receive meaningful feedback, and recognise evidence of their own progress.</p>
+    <p>The scale of the project also taught me something about consistency. Designing 43 topics required a structure strong enough to create coherence across the curriculum without making every learning experience feel identical. The seven-part framework became my way of balancing that consistency with enough flexibility for each topic to retain its own purpose.</p>
+    <p>Looking back, I can also see how this project connects to what I now describe as My Learning Chain. Confidence is not something I want to hand to learners through reassurance. I want the learning experience to help them develop reasons to believe in their own capability. That distinction continues to influence the way I think about feedback, practice, reflection, and learner ownership in everything I design.</p>
+  </section>
+
+  <p class="wrap" style="font-size:.82rem;color:var(--slate);padding-top:.5rem;">Design &amp; facilitation: Nicoleta Malaki · Drafting partner: Claude (Anthropic) · Part of the Entrepreneurship Talks portfolio</p>
+
+  <section class="wrap" style="display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;flex-wrap:wrap;gap:1rem;">
+    <a class="btn btn-quiet" href="ai-reflection-coach.html">← Previous project</a>
+    <a class="btn" href="../projects.html">Back to all projects</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Nicoleta Malaki</p>
+    <p><a href="../contact.html">Get in touch</a></p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>
