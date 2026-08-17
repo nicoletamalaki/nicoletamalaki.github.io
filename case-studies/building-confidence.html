@@ -32,6 +32,23 @@
   .sequence-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .7rem;font-family:var(--font-mono);font-size:.85rem;letter-spacing:.02em;color:var(--ink-soft);margin:1rem 0 1.6rem;}
   .sequence-row .arrow{color:var(--slate);}
 
+
+  .project-kicker{font-family:var(--font-mono);font-size:.75rem;color:var(--slate);text-transform:uppercase;letter-spacing:.06em;margin:.2rem 0 .8rem;}
+  .project-subtitle{font-size:clamp(1.7rem,4vw,3.4rem);line-height:1.02;max-width:820px;margin:.2rem 0 1rem;}
+  .transformation-strip{display:flex;flex-wrap:wrap;gap:.55rem;align-items:center;margin:1.2rem 0 1.7rem;font-family:var(--font-mono);font-size:.8rem;}
+  .transformation-strip .node{border:.5px solid var(--line);border-radius:999px;padding:.45rem .7rem;background:rgba(255,255,255,.28);}
+  .transformation-strip .arrow{color:var(--slate);}
+  .artifact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.4rem 0 2rem;}
+  .artifact-card{border:.5px solid var(--line);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.24);}
+  .artifact-card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top center;border-bottom:.5px solid var(--line);}
+  .artifact-card .body{padding:1rem;}
+  .artifact-card h3{margin:.1rem 0 .35rem;font-size:1.05rem;}
+  .artifact-card p{font-size:.9rem;color:var(--ink-soft);margin:.3rem 0 .9rem;}
+  .artifact-card .btn{width:100%;justify-content:center;}
+  .callout-hero{border-left:3px solid var(--accent);padding:.2rem 0 .2rem 1rem;margin:1.3rem 0 1.8rem;}
+  .callout-hero strong{font-size:1.05rem;}
+  @media(max-width:800px){.artifact-grid{grid-template-columns:1fr;}.artifact-card img{aspect-ratio:16/10;}}
+
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 </style>
 </head>
@@ -54,6 +71,7 @@
 <div class="subnav" aria-label="Case study sections">
   <div class="wrap">
     <a href="#challenge">Challenge</a>
+    <a href="#transformation">Transformation</a>
     <a href="#thinking">Design thinking</a>
     <a href="#solution">Solution</a>
     <a href="#deliverables">Final deliverables</a>
@@ -69,27 +87,32 @@
     <a href="../projects.html" style="text-decoration:underline;">← All projects</a>
   </p>
 
+  
   <section class="wrap" style="padding-top:1rem;padding-bottom:2rem;">
     <span class="eyebrow">Case study · Supporting project</span>
-    <h1>Building Confidence: Effective Communication Strategies for Employers and Recruiters</h1>
-    <p class="lede">A 43-topic, two-part facilitator-led curriculum on professional communication and public speaking for young adults navigating job-seeking and early-stage entrepreneurship. The original seminar concept was mine; this case study documents how it became a structured curriculum for Entrepreneurship Talks.</p>
+    <p class="project-kicker">Building Confidence</p>
+    <h1 class="project-subtitle">From 50 pages to one focused learning experience.</h1>
+    <p class="lede">A facilitator-ready, three-hour learning experience for young entrepreneurs, developed from a much larger body of research and curriculum content. The design challenge was not to fit everything in — it was to decide what learners needed, sequence it deliberately, and create enough structure for reflection, practice, and action.</p>
     <div class="tags-row">
-      <span class="tag tag-skill">Curriculum architecture</span>
-      <span class="tag tag-skill">Facilitator guide design</span>
-      <span class="tag tag-tool">43-topic framework</span>
-      <span class="tag tag-modality">Facilitator-led workshop</span>
+      <span class="tag tag-skill">Learning architecture</span>
+      <span class="tag tag-skill">Scenario-based design</span>
+      <span class="tag tag-skill">Facilitation design</span>
+      <span class="tag tag-skill">Psychological safety</span>
+      <span class="tag tag-modality">180-minute workshop</span>
     </div>
   </section>
+
 
   <section class="wrap section-border" style="padding-bottom:0;">
     <span class="eyebrow">Snapshot</span>
     <h2 class="sr-only">Project snapshot</h2>
+    
     <div class="snapshot-grid">
-      <div><span class="k">Client</span>Entrepreneurship Talks</div>
-      <div><span class="k">Audience</span>Job seekers &amp; early entrepreneurs, 18–30</div>
-      <div><span class="k">Role</span>Learning Experience Designer / Facilitator</div>
-      <div><span class="k">Scope</span>43 topics across 2 curricula</div>
-      <div><span class="k">Status</span>Manager-approved</div>
+      <div><span class="k">Client / context</span>Entrepreneurship Talks</div>
+      <div><span class="k">Audience</span>Young job seekers &amp; early entrepreneurs</div>
+      <div><span class="k">Role</span>Instructional Designer / Facilitator</div>
+      <div><span class="k">Source scope</span>49-page guide · 43 topics</div>
+      <div><span class="k">Workshop scope</span>9 blocks · 180 minutes</div>
     </div>
   </section>
 
@@ -101,6 +124,27 @@
     <p>That's also why the curriculum was split into two parts rather than one: professional communication (aimed more at the Career Seeker pattern) and public speaking (aimed more at the Early Venturer pattern), sharing a single instructional structure so the two curricula stay coherent with each other rather than becoming two unrelated products.</p>
     <p>The documentation also situates the problem in a wider context. European Commission research (Eurobarometer, 2023) found that 46% of young Europeans aged 15–30 say they would consider starting a business, but only 9% have actually done so. That gap is useful as context for why this kind of communication training matters to this age group — it isn't evidence of what this particular curriculum achieved, and I've been careful throughout this case study to keep that distinction clear.</p>
     <p>The seminar concept itself started as my own idea. Developing it into a structured, 43-topic curriculum for Entrepreneurship Talks was the instructional design problem this case study documents.</p>
+  </section>
+
+
+  <section class="wrap section-border" id="transformation">
+    <span class="eyebrow">From content to learning</span>
+    <h2>The hardest part was deciding what not to teach</h2>
+    <p>The source document was intentionally comprehensive: 49 pages spanning 43 topics across professional communication and public speaking. That breadth was useful as a knowledge base, but it was not a usable three-hour learning experience.</p>
+    <p>The workshop therefore became an exercise in purposeful selection. I reduced the source material to a nine-block arc built around the moments most likely to help this audience move from self-doubt to a concrete next action.</p>
+
+    <div class="transformation-strip" role="img" aria-label="Source guide to selection to learning architecture to facilitation to learner action.">
+      <span class="node">49-page source guide</span><span class="arrow">→</span>
+      <span class="node">Content selection</span><span class="arrow">→</span>
+      <span class="node">9-block learning arc</span><span class="arrow">→</span>
+      <span class="node">Facilitated practice</span><span class="arrow">→</span>
+      <span class="node">Learner action</span>
+    </div>
+
+    <div class="callout-hero">
+      <strong>Instructional design is not content compression.</strong>
+      <p style="margin:.35rem 0 0;">The goal was to give learners less information — and more opportunity to recognise, articulate, practise, and act.</p>
+    </div>
   </section>
 
   <!-- DESIGN THINKING -->
@@ -181,34 +225,64 @@
     </div>
   </section>
 
+
   <!-- SOLUTION -->
   <section class="wrap section-border" id="solution">
     <span class="eyebrow">The solution</span>
-    <h2>Design goals document and the full curriculum</h2>
-    <p>The curriculum exists as two connected pieces of documentation. The design goals document holds the rationale — the theoretical grounding and structural decisions that explain why the seven-step structure is built the way it is. The full workshop and facilitation material for all 43 topics is consolidated into a single 49-page curriculum document, kept available on request rather than published openly.</p>
-    <p>The two are meant to be read together — the design goals document for understanding or adapting the approach, the full curriculum for running it.</p>
+    <h2>A learning system, not a slide deck</h2>
+    <p>The final workshop package combines learner-facing, facilitator-facing, and quality-control elements. The deck carries the live experience; the facilitator guide translates the architecture into timings, transitions, watch-outs, hybrid notes, and low-exposure alternatives; and the Confidence Compass gives participants a private place to turn reflection into language and action.</p>
+    <p>The workshop keeps the original seven-part logic, but applies it selectively inside a focused 180-minute arc rather than trying to run all 43 source topics. This keeps the design coherent while protecting attention, pacing, and practice time.</p>
   </section>
+
+
 
   <!-- DELIVERABLES -->
   <section class="wrap section-border" id="deliverables">
     <span class="eyebrow">Final deliverables</span>
     <h2>What shipped</h2>
+    <p>Each artifact solves a different part of the delivery problem: what participants see, what the facilitator needs, and what learners keep for themselves.</p>
+
+    <div class="artifact-grid">
+      <article class="artifact-card">
+        <img src="assets/facilitator-deck-preview.png" alt="Preview of the Building Confidence facilitator deck cover">
+        <div class="body">
+          <h3>Facilitator Deck</h3>
+          <p>37-page live delivery deck for the three-hour workshop.</p>
+          <a class="btn btn-quiet" href="files/Facilitator Deck.pdf" target="_blank" rel="noopener">View PDF →</a>
+        </div>
+      </article>
+
+      <article class="artifact-card">
+        <img src="assets/facilitator-guide-preview.png" alt="Preview of the Building Confidence facilitator guide">
+        <div class="body">
+          <h3>Facilitator Guide</h3>
+          <p>Minute-by-minute timing, transitions, hybrid notes, watch-outs, and low-exposure alternatives.</p>
+          <a class="btn btn-quiet" href="files/Facilitator_Guide_FINAL.pdf" target="_blank" rel="noopener">View PDF →</a>
+        </div>
+      </article>
+
+      <article class="artifact-card">
+        <img src="assets/confidence-compass-preview.png" alt="Preview of the Make Your Move page from the Confidence Compass">
+        <div class="body">
+          <h3>Confidence Compass</h3>
+          <p>A five-page participant resource that moves from reflection to clarity, action, and resilience.</p>
+          <a class="btn btn-quiet" href="files/Confidence Compass.pdf" target="_blank" rel="noopener">View PDF →</a>
+        </div>
+      </article>
+    </div>
 
     <div class="deliverable-card">
-      <div><span class="name">Design Goals &amp; Curriculum Framework</span><span class="type">PDF · rationale, theoretical grounding, and structural decisions</span></div>
-      <a class="btn btn-quiet" href="files/Building_Confidence_Professional_Communication_Strategies_for_Recruiters__Employers.pdf" download target="_blank" rel="noopener" aria-label="Download the Building Confidence Design Goals document PDF">↓ Download PDF</a>
-    </div>
-    <div class="deliverable-card">
-      <div><span class="name">Full curriculum</span><span class="type">49-page consolidated document · 43 topics across 2 curricula — available on request</span></div>
-      <a class="btn btn-quiet" href="../contact.html">Get in touch →</a>
+      <div><span class="name">Full source curriculum</span><span class="type">49-page consolidated document · 43 topics across 2 curricula — retained as the underlying resource library</span></div>
+      <span class="type">Not published openly</span>
     </div>
   </section>
+
 
   <!-- EVOLUTION -->
   <section class="wrap section-border" id="evolution">
     <span class="eyebrow">Evolution</span>
     <h2>An iterative loop, not a straight line</h2>
-    <p>The framework and overall workshop structure were established once, early, and held steady after that. Everything below that level moved in a repeated loop: AI-supported drafting and revision, topic by topic, with reflection built into every activity rather than treated as a separate step, and research brought in as needed for the problem statement and design goals sections.</p>
+    <p>The project evolved in two layers. First came the comprehensive source curriculum. Once that knowledge base was stable, the work shifted from expansion to reduction: selecting what belonged in the live experience, sequencing it into nine blocks, and building the facilitator and participant supports around that arc.</p>
     <p>Claude was used as a brainstorming and drafting partner in that loop — not a replacement for judgement. I set the framework, the values, and the intended outcomes; AI helped draft and stress-test individual topics against them. Every inconsistency that surfaced was corrected through human review, not assumed correct because AI had produced it.</p>
 
     <div class="design-note">
@@ -222,22 +296,24 @@
     <span class="eyebrow">Outcome / evidence</span>
     <h2>What's documented, and what isn't yet</h2>
     <p>It's worth being precise about what this section can and can't claim.</p>
-    <p><strong>What's documented as project evidence:</strong> the full 43-topic, two-curriculum framework was completed, applying a consistent seven-part structure throughout; the design was reviewed and is manager-approved; and the drafting process included a working example of an issue being caught and corrected through human review rather than assumed correct.</p>
+    <p><strong>What's documented as project evidence:</strong> the full 43-topic source framework was completed; a focused 180-minute workshop was derived from that source material; the final package now includes a facilitator deck, facilitator guide, and Confidence Compass participant resource; evidence-sensitive wording was reviewed and unsupported claims were removed rather than carried forward.</p>
     <p><strong>What isn't yet available:</strong> no learner outcome data — confidence measures, facilitator observation notes, participant feedback, or evidence of behavioural change — has been collected or documented for this curriculum. Manager approval and a completed, applied framework are evidence that the project was finished and accepted; they are not evidence of what happened for learners who go through it. I'm stating that plainly rather than filling the gap with a number that doesn't exist.</p>
     <p>Two honest limitations are worth naming here rather than glossing over. First, by linking confidence and communication skill so directly to entrepreneurial outcomes, the curriculum risks implying they're the main barrier to venture success — when capital, timing, and market conditions matter just as much, and the seminar doesn't address any of those. Second, the Confidence Compass — the reflection step I'd point to as the most distinctive part of the design — asks learners to name their own weaknesses honestly, which is genuinely difficult even inside a psychologically safer activity structure. That's a real limitation of the design, not a solved problem.</p>
   </section>
+
 
   <!-- REFLECTION -->
   <section class="wrap section-border" id="reflection">
     <span class="eyebrow">Reflection</span>
     <h2>What I'd carry forward</h2>
-    <p>Building Confidence is particularly meaningful to me because the original idea for the seminar was my own. I have always considered confidence an important part of how people approach challenges—not only in entrepreneurship or professional communication, but in many areas of life. Confidence can change perspective, influence how someone presents themselves, and give them the willingness to act toward a goal.</p>
-    <p>Designing this curriculum, however, made me think more carefully about what it means to design for confidence. It cannot simply be encouraged or assumed. Learners arrive with different experiences, different levels of self-belief, and different comfort levels with communication. A learning experience therefore needs to create opportunities for people to practise, reflect, receive meaningful feedback, and recognise evidence of their own progress.</p>
-    <p>The scale of the project also taught me something about consistency. Designing 43 topics required a structure strong enough to create coherence across the curriculum without making every learning experience feel identical. The seven-part framework became my way of balancing that consistency with enough flexibility for each topic to retain its own purpose.</p>
-    <p>Looking back, I can also see how this project connects to what I now describe as My Learning Chain. Confidence is not something I want to hand to learners through reassurance. I want the learning experience to help them develop reasons to believe in their own capability. That distinction continues to influence the way I think about feedback, practice, reflection, and learner ownership in everything I design.</p>
+    <p>The biggest design decision in this project was subtraction. Building the source curriculum showed me how much <em>could</em> be taught; designing the workshop forced me to decide what <em>should</em> be taught in one three-hour experience.</p>
+    <p>That shift changed how I think about instructional design. A strong learning experience is not the shortest possible version of a large document. It is a deliberate sequence of moments that helps learners notice something, try something, and leave with a next step they can actually use.</p>
+    <p>The Confidence Compass became the clearest expression of that idea. Rather than ending each concept with more advice, it turns the question back to the learner: what evidence do you already have, what do you want to say, what move will you make, and what remains true if the outcome is disappointing?</p>
+    <p>I also became more deliberate about designing for the facilitator. The final guide supports a competent facilitator without scripting every word, and makes psychological safety operational through opt-outs, private reflection, stable pairing, and low-exposure alternatives. That balance between structure and autonomy is something I would carry into future facilitated learning.</p>
   </section>
 
-  <p class="wrap" style="font-size:.82rem;color:var(--slate);padding-top:.5rem;">Design &amp; facilitation: Nicoleta Malaki · Drafting partner: Claude (Anthropic) · Part of the Entrepreneurship Talks portfolio</p>
+
+  <p class="wrap" style="font-size:.82rem;color:var(--slate);padding-top:.5rem;">Instructional design &amp; facilitation: Nicoleta Malaki · AI-supported drafting, critique, and visual iteration · Entrepreneurship Talks</p>
 
   <section class="wrap" style="display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;flex-wrap:wrap;gap:1rem;">
     <a class="btn btn-quiet" href="ai-reflection-coach.html">← Previous project</a>
