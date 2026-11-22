@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Voices We Miss — Nicoleta Malaki</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  .subnav{position:sticky;top:68px;background:var(--paper);border-bottom:0.5px solid var(--line);z-index:40;overflow-x:auto;}
+  .subnav .wrap{display:flex;gap:1.6rem;padding-top:.8rem;padding-bottom:.8rem;white-space:nowrap;}
+  .subnav a{font-family:var(--font-mono);font-size:.76rem;text-decoration:none;color:var(--slate);letter-spacing:.02em;}
+  .subnav a:hover{color:var(--ink);}
+  .part-block{border-left:2px solid var(--moss);padding-left:1.6rem;margin:1.6rem 0;}
+  .snapshot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin:1.6rem 0 3rem;}
+  .snapshot-grid div{border:0.5px solid var(--line);border-radius:8px;padding:1rem;}
+  .snapshot-grid .k{font-family:var(--font-mono);font-size:.68rem;color:var(--slate);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;}
+  @media(max-width:700px){.snapshot-grid{grid-template-columns:1fr 1fr;}}
+  .phase-card{border:0.5px solid var(--line);border-radius:8px;padding:1.4rem;margin-bottom:1rem;}
+  .phase-card h3{font-size:1.15rem;margin-bottom:.4rem;}
+  .shot-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.6rem 0;}
+  .shot-grid figure{margin:0;}
+  .shot-grid img{border:0.5px solid var(--line);border-radius:8px;width:100%;}
+  .shot-grid figcaption{font-size:.82rem;color:var(--slate);margin-top:.5rem;}
+  @media(max-width:640px){.shot-grid{grid-template-columns:1fr;}}
+  .filter-table{width:100%;border-collapse:collapse;font-size:.92rem;margin:1.2rem 0;}
+  .filter-table th,.filter-table td{text-align:left;padding:.6rem .8rem;border-bottom:0.5px solid var(--line);vertical-align:top;}
+  .filter-table th{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--slate);font-weight:400;}
+  .verdict{font-family:var(--font-mono);font-size:.72rem;padding:.15em .5em;border-radius:4px;white-space:nowrap;}
+  .verdict-as-is{background:var(--moss-bg);color:#2E4438;}
+  .verdict-adapted{background:var(--clay-bg);color:#6E2E22;}
+  .verdict-excluded{background:var(--slate-bg);color:#3E454C;}
+  .deliverable-card{border:0.5px solid var(--line);border-radius:8px;padding:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.8rem;}
+  .deliverable-card .name{font-size:.98rem;}
+  .deliverable-card .type{font-family:var(--font-mono);font-size:.7rem;color:var(--slate);display:block;margin-top:.2rem;}
+  .placeholder-block{border:0.5px dashed var(--line);border-radius:8px;padding:1.4rem;color:var(--slate);font-size:.92rem;}
+  .phase-card .phase-kicker{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--moss);margin:0 0 .5rem;font-weight:500;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+ .small{font-size:.85rem;color:var(--slate)}
+ .case-visual{margin:2rem 0 2.7rem;max-width:960px}.case-visual figure{margin:0}.case-visual img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:9px}.case-visual figcaption{font-size:.9rem;line-height:1.65;color:var(--ink-soft);margin-top:.8rem;max-width:850px}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Nicoleta Malaki</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects.html" aria-current="page">Projects</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="subnav" aria-label="Case study sections"><div class="wrap">
+<a href="#challenge">Challenge</a><a href="#learners">Learner context</a><a href="#strategy">Design strategy</a><a href="#experience">Experience</a><a href="#screenshots">Design in action</a><a href="#evidence">Evidence &amp; testing</a><a href="#reflection">Reflection</a>
+</div></div>
+
+<main id="main">
+<p class="wrap" style="font-size:.85rem;color:var(--slate);padding-top:1.5rem;"><a href="../projects.html">← All projects</a></p>
+<section class="wrap" style="padding-top:2rem;padding-bottom:2rem;">
+<span class="eyebrow">Facilitated learning · Community decision-making · Interactive prototype</span>
+<h1>The Voices We Miss</h1>
+<p class="lead" style="max-width:780px;">How do we make a community decision when not everyone has been heard?</p>
+<p>A 90-minute facilitated, scenario-based learning experience that invites young adults to examine competing proposals, encounter different information, and make room for perspectives that might otherwise be overlooked.</p>
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;"><a class="btn" href="files/The_Voices_We_Miss_Interactive.html" target="_blank" rel="noopener">Explore the interactive experience ↗</a><a class="btn btn-quiet" href="#strategy">Explore the design</a></div>
+</section>
+<section class="wrap" id="challenge"><h2>Snapshot</h2>
+<div class="snapshot-grid"><div><span class="k">Format</span>90-minute facilitated workshop</div><div><span class="k">Audience</span>Young adults / youth groups</div><div><span class="k">Focus</span>Inclusion, perspective-taking, deliberation</div><div><span class="k">Status</span>Working prototype; not formally piloted</div></div>
+<h2>A choice that cannot be made well from one perspective</h2>
+<p>Common Ground is a fictional youth NGO with capacity to pilot just one initiative. Learners weigh three worthwhile proposals: <strong>Digital Skills Swap</strong>, <strong>Culture &amp; Connection Nights</strong>, and <strong>Stories &amp; Voices Café</strong>. Each has benefits, practical constraints, and questions about whose needs may be missed.</p>
+<p>The design challenge was not to teach participants which proposal to choose. It was to help them recognize how partial information, unequal access, and absent voices shape collective decisions—without requiring consensus or personal disclosure.</p>
+<div class="case-visual"><figure><img src="images/voices-challenge.png" alt="Three fictional community initiative proposals presented for learner consideration" loading="lazy"><figcaption><strong>Opening scenario.</strong> All three initiatives have value. No predetermined winner is presented, so learners must weigh access, participation, feasibility, and care.</figcaption></figure></div>
+</section>
+<section class="wrap" id="learners"><h2>Designing for participation without forced disclosure</h2>
+<p>The workshop is designed for a facilitated group setting. Participants make a private first choice before group discussion, then work in small councils of four or five. Facilitators manage the timing of information releases and support discussion.</p>
+<p>Participation is intentionally flexible: no one is required to volunteer as an Ambassador, share a personal experience, or change their position. These boundaries matter when learning activities involve identity, belonging, and community priorities.</p></section>
+<section class="wrap" id="strategy"><h2>Individual judgment first. Shared inquiry next.</h2>
+<p>Rather than opening with debate, the experience separates initial preference from later deliberation. The <strong>Community Pulse</strong> can display anonymous group-level totals, giving participants a view of the room without exposing individuals. Councils then receive different information packets and revisit their provisional decisions as additional perspectives emerge.</p>
+<div class="phase-card"><p class="phase-kicker">Design choice 01</p><h3>Protect an independent first choice</h3><p>Participants record their own initial preference before hearing the group, making later reflection about their reasoning possible.</p></div>
+<div class="phase-card"><p class="phase-kicker">Design choice 02</p><h3>Distribute information unevenly—on purpose</h3><p>Different councils begin with different packets. The later Assembly makes the limits of each group's knowledge visible and creates a reason to listen.</p></div>
+<div class="phase-card"><p class="phase-kicker">Design choice 03</p><h3>Give a vulnerable idea a fair hearing</h3><p>Before provisional elimination, a voluntary Ambassador offers the strongest fair case for retaining the proposal. Learners are instructed not to invent absent people's views and to identify what they still need to know.</p></div>
+</section>
+<section class="wrap" id="experience"><h2>From first choice to reconsidered judgment</h2>
+<div class="part-block"><h3>01 · Invitation and private first choice</h3><p>Learners meet Common Ground and its three proposals, then record an initial preference independently.</p></div>
+<div class="part-block"><h3>02 · Community Pulse and council inquiry</h3><p>The facilitator reveals anonymous group-level results. Councils receive assigned information packets and examine trade-offs.</p></div>
+<div class="part-block"><h3>03 · Tribute to the Idea and missing voices</h3><p>Before an idea is set aside, learners practice fair representation. A subsequent information drop introduces perspectives or constraints that complicate the earlier judgment.</p></div>
+<div class="part-block"><h3>04 · Council Assembly and Decision Trail</h3><p>Groups exchange what they learned, reconsider their choices, and reflect aloud on how their reasoning was challenged, strengthened, or qualified.</p></div>
+</section>
+<section class="wrap" id="screenshots"><h2>Design in action</h2>
+<div class="case-visual"><figure><img src="images/voices-tribute.png" alt="Tribute to the Idea prompt and blank council reflection fields" loading="lazy"><figcaption><strong>Fairness before elimination.</strong> The Tribute asks for the strongest fair case for keeping an idea, while explicitly discouraging invented perspectives. Empty response fields preserve learner ownership.</figcaption></figure></div>
+<div class="case-visual"><figure><img src="images/voices-decision-trail.png" alt="Final spoken reflection prompt and Decision Trail export controls" loading="lazy"><figcaption><strong>Reflection without forced consensus.</strong> Learners consider which perspective affected their reasoning. They may keep their opinion and need not disclose personal experiences. Notes can be exported or cleared.</figcaption></figure></div>
+</section>
+<section class="wrap" id="evidence"><h2>What has been checked—and what has not</h2>
+<p>The interactive HTML is a <strong>working facilitated prototype</strong>, not a synchronized voting platform. It does not transmit votes or synchronize phones. The facilitator must use an actual anonymous collection method for the Community Pulse and may manually enter aggregate totals into the display.</p>
+<p>Participant notes are stored locally when browser storage is available; there is no automatic collection or transfer. The experience has been tested locally for its intended interactions, but it has <strong>not yet been formally piloted with learners</strong>. Claims about improved perspective-taking or decision quality would require observation and evaluation in a real session.</p>
+<p>A future pilot could examine whether learners can name previously overlooked stakeholders, articulate a fair case for an alternative, and explain how new information affected their reasoning. These are proposed evaluation indicators, not measured outcomes.</p>
+</section>
+<section class="wrap" id="reflection"><h2>Designer's Reflection</h2>
+<p>My central design decision was to make listening necessary rather than merely desirable. By giving councils different information, I created a reason to exchange perspectives. By placing the Tribute before elimination, I made fairness part of the decision process rather than an afterthought.</p>
+<p>I also wanted to avoid equating a successful workshop with agreement. A learner who retains their first choice but can explain it more carefully, acknowledge missing information, and represent another view fairly may have made meaningful progress.</p>
+<p>The main implementation trade-off is facilitation complexity: the staged information drops, private choices, and anonymous pulse require clear facilitator guidance. A pilot would help establish where the pacing or instructions need adjustment.</p>
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.6rem;"><a class="btn" href="files/The_Voices_We_Miss_Interactive.html" target="_blank" rel="noopener">Try The Voices We Miss ↗</a><a class="btn btn-quiet" href="../projects.html">Back to projects</a></div>
+</section>
+</main>
+<footer class="site-footer"><div class="wrap"><p>© 2026 Nicoleta Malaki</p><p><a href="../contact.html">Get in touch</a></p></div></footer><script src="../script.js"></script></body></html>
