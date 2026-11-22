@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Evidence Room — Nicoleta Malaki</title>
+<link rel="stylesheet" href="../styles.css">
+<style>
+  .subnav{position:sticky;top:68px;background:var(--paper);border-bottom:0.5px solid var(--line);z-index:40;overflow-x:auto;}
+  .subnav .wrap{display:flex;gap:1.6rem;padding-top:.8rem;padding-bottom:.8rem;white-space:nowrap;}
+  .subnav a{font-family:var(--font-mono);font-size:.76rem;text-decoration:none;color:var(--slate);letter-spacing:.02em;}
+  .subnav a:hover{color:var(--ink);}
+  .part-block{border-left:2px solid var(--moss);padding-left:1.6rem;margin:1.6rem 0;}
+  .snapshot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin:1.6rem 0 3rem;}
+  .snapshot-grid div{border:0.5px solid var(--line);border-radius:8px;padding:1rem;}
+  .snapshot-grid .k{font-family:var(--font-mono);font-size:.68rem;color:var(--slate);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.3rem;}
+  @media(max-width:700px){.snapshot-grid{grid-template-columns:1fr 1fr;}}
+  .phase-card{border:0.5px solid var(--line);border-radius:8px;padding:1.4rem;margin-bottom:1rem;}
+  .phase-card h3{font-size:1.15rem;margin-bottom:.4rem;}
+  .shot-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.6rem 0;}
+  .shot-grid figure{margin:0;}
+  .shot-grid img{border:0.5px solid var(--line);border-radius:8px;width:100%;}
+  .shot-grid figcaption{font-size:.82rem;color:var(--slate);margin-top:.5rem;}
+  @media(max-width:640px){.shot-grid{grid-template-columns:1fr;}}
+  .filter-table{width:100%;border-collapse:collapse;font-size:.92rem;margin:1.2rem 0;}
+  .filter-table th,.filter-table td{text-align:left;padding:.6rem .8rem;border-bottom:0.5px solid var(--line);vertical-align:top;}
+  .filter-table th{font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--slate);font-weight:400;}
+  .verdict{font-family:var(--font-mono);font-size:.72rem;padding:.15em .5em;border-radius:4px;white-space:nowrap;}
+  .verdict-as-is{background:var(--moss-bg);color:#2E4438;}
+  .verdict-adapted{background:var(--clay-bg);color:#6E2E22;}
+  .verdict-excluded{background:var(--slate-bg);color:#3E454C;}
+  .deliverable-card{border:0.5px solid var(--line);border-radius:8px;padding:1.2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.8rem;}
+  .deliverable-card .name{font-size:.98rem;}
+  .deliverable-card .type{font-family:var(--font-mono);font-size:.7rem;color:var(--slate);display:block;margin-top:.2rem;}
+  .placeholder-block{border:0.5px dashed var(--line);border-radius:8px;padding:1.4rem;color:var(--slate);font-size:.92rem;}
+  .phase-card .phase-kicker{font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--moss);margin:0 0 .5rem;font-weight:500;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+ .small{font-size:.85rem;color:var(--slate)}
+ .case-visual{margin:2rem 0 2.7rem;max-width:960px}.case-visual figure{margin:0}.case-visual img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:9px}.case-visual figcaption{font-size:.9rem;line-height:1.65;color:var(--ink-soft);margin-top:.8rem;max-width:850px}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="site-nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Nicoleta Malaki</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../projects.html" aria-current="page">Projects</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="subnav" aria-label="Case study sections"><div class="wrap">
+<a href="#challenge">Challenge</a><a href="#learners">Learner context</a><a href="#strategy">Design strategy</a><a href="#experience">Experience</a><a href="#screenshots">Design in action</a><a href="#evidence">Evidence &amp; testing</a><a href="#reflection">Reflection</a>
+</div></div>
+
+<main id="main">
+<p class="wrap" style="font-size:.85rem;color:var(--slate);padding-top:1.5rem;"><a href="../projects.html" style="text-decoration:underline;">← All projects</a></p>
+<section class="wrap" style="padding-top:1rem;padding-bottom:2rem;">
+<span class="eyebrow">Case study · Interactive learning experience</span>
+<h1>The Evidence Room</h1>
+<p class="lede">Is the Shortcut Worth Taking? A self-directed, scenario-based investigation where young adults evaluate a confident AI recommendation, examine the evidence, and make a defensible decision without being told what to think.</p>
+<div class="tags-row"><span class="tag tag-skill">Scenario-based learning</span><span class="tag tag-skill">Critical thinking</span><span class="tag tag-skill">Evidence evaluation</span><span class="tag tag-tool">Interactive HTML</span><span class="tag tag-modality">Facilitator-led + independent revisit</span></div>
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.8rem;"><a class="btn" href="files/The_Evidence_Room_Interactive.html" target="_blank" rel="noopener">Explore the interactive case ↗</a><a class="btn btn-quiet" href="#strategy">Read the design rationale ↓</a></div>
+</section>
+<section class="wrap section-border" style="padding-bottom:0;"><span class="eyebrow">Project snapshot</span><h2 class="sr-only">Snapshot</h2><div class="snapshot-grid">
+<div><span class="k">Context</span>Entrepreneurship Talks · non-formal youth learning</div>
+<div><span class="k">Audience</span>Young adults making career and learning decisions</div>
+<div><span class="k">Format</span>90-minute group workshop; optional independent revisit</div>
+<div><span class="k">Status</span>Designed and practically tested; not yet piloted with learners</div>
+</div></section>
+<section class="wrap section-border" id="challenge"><span class="eyebrow">The challenge</span><h2>When an AI answer sounds more certain than the evidence</h2>
+<p>Alex, a fictional 24-year-old jobseeker, is considering the real Google Digital Marketing &amp; E-commerce Professional Certificate. He has limited time and money. A scripted AI response confidently recommends enrolling, citing an alleged Google outcomes report claiming that 87% of graduates secured a relevant job within six months.</p>
+<p><strong>That statistic and its attribution are part of the fictional scenario—not verified facts.</strong> The learning problem is not simply to spot an unreliable claim. It is to decide what advice Alex can responsibly act on, given the evidence, his circumstances, and the uncertainty that remains.</p>
+<div class="design-note"><span class="label">Design tension</span><p>Make the case engaging enough to investigate without turning it into a quiz with a hidden “correct” answer. Learners need to own the reasoning, not merely identify the designer's preferred choice.</p></div>
+</section>
+<section class="wrap section-border" id="learners"><span class="eyebrow">Learner context</span><h2>Agency first, with enough structure to support inquiry</h2>
+<p>The experience is designed for young adults encountering persuasive digital advice in decisions that have real personal costs. It assumes no specialist fact-checking expertise. Participants may investigate collaboratively during a facilitated session or return to the case independently.</p>
+<p>To reduce unnecessary pressure, investigations can be opened in any order, notebook fields may be left blank, and different well-reasoned conclusions are acceptable. The case includes optional research leads rather than mandatory checkpoints.</p>
+</section>
+<section class="wrap section-border" id="strategy"><span class="eyebrow">Design strategy</span><h2>Three investigations, one judgment</h2>
+<p>The learning architecture deliberately separates <strong>claim verification</strong>, <strong>personal fit</strong>, and <strong>the difference between skills and employment outcomes</strong>. A recommendation can be factually plausible in parts and still be poorly suited to the person receiving it.</p>
+<div class="phase-card"><p class="phase-kicker">Investigation 01</p><h3>The Missing Report</h3><p>Trace the alleged employment statistic to its source. Distinguish a quoted claim from verifiable evidence, and note what cannot be established.</p></div>
+<div class="phase-card"><p class="phase-kicker">Investigation 02</p><h3>The Price of a Shortcut</h3><p>Consider Alex's available time, money, goals, and alternatives before treating enrolment as an obvious next step.</p></div>
+<div class="phase-card"><p class="phase-kicker">Investigation 03</p><h3>Skills Are Not Guarantees</h3><p>Separate what a certificate teaches from what it can credibly promise about job outcomes.</p></div>
+<div class="design-note"><span class="label">Key decision</span><p>The detective-study environment invites exploration, but the learner controls the route. There is no forced order, completion gate, score, or artificial penalty for uncertainty.</p></div>
+<h3>Reflection is built into the decision</h3><p>The Decision Compass captures an initial recommendation before investigation and a final judgment afterwards. The Case Notebook supports recording discoveries, doubts, and revisions. A perspective-exchange activity adds social reasoning in the live workshop; independent users encounter clearly fictional perspectives instead of simulated real participants.</p>
+</section>
+<section class="wrap section-border" id="experience"><span class="eyebrow">The experience</span><h2>From briefing to evidence-based advice</h2>
+<p>Participants open a confidential case briefing, read Alex's request and the scripted AI response, record an initial view, then explore a warm, gothic detective study. The three investigative paths remain independent, so participants can follow the questions that matter most to them.</p>
+<p>The interactive includes a Case Notebook, Evidence Board, optional research leads, and final decision. Entries are stored locally in the browser where storage is available; participants can export a record. The interface also warns users about shared-device privacy and offers a way to clear saved entries.</p>
+<div class="deliverable-card"><div><span class="name">The Evidence Room · Interactive Case</span><span class="type">HTML · self-contained interactive experience</span></div><a class="btn btn-quiet" href="files/The_Evidence_Room_Interactive.html" target="_blank" rel="noopener">Open experience ↗</a></div>
+<p class="small">The case is designed to support a 90-minute facilitated workshop. The digital experience can also be revisited independently; it does not replicate the human discussion of a live session.</p>
+</section>
+<section class="wrap section-border" id="screenshots"><span class="eyebrow">Design in action</span><h2>Three interactions, three opportunities to think</h2><p>Authentic screenshots from the developed experience illustrate the instructional design; they are not evidence of measured learning outcomes.</p><div class="case-visual"><figure><img src="images/evidence-room-study.png" alt="The Detective's Study with three selectable investigation paths." loading="lazy"><figcaption><strong>Choice without a prescribed route.</strong> Three independent investigations invite learners to verify the AI-generated claim, consider Alex's circumstances, and distinguish learning from employment guarantees. There is no mandatory sequence.</figcaption></figure></div><div class="case-visual"><figure><img src="images/evidence-room-compass.png" alt="Blank Decision Compass showing an unselected initial advice field and two empty reflection prompts." loading="lazy"><figcaption><strong>Making initial reasoning visible.</strong> Learners record an initial recommendation, explain their thinking, and identify a question to investigate. They revisit their judgment later; changing their mind is not required. The blank fields leave the reasoning to the learner.</figcaption></figure></div><div class="case-visual"><figure><img src="images/evidence-room-notebook.png" alt="Blank Case Notebook with four reflective prompts." loading="lazy"><figcaption><strong>Scaffolding without supplying answers.</strong> The notebook distinguishes initial interpretation, source and finding, remaining uncertainty, and current interpretation. 'Not recorded' means no entry has been made; fields are optional. The blank state preserves learner ownership.</figcaption></figure></div></section><section class="wrap section-border" id="evidence"><span class="eyebrow">Evidence and limitations</span><h2>What has been checked—and what has not</h2>
+<p>The interactive has undergone practical testing and iterative design review. That supports a statement about development readiness, <strong>not</strong> a claim that learners improved their critical thinking or decision-making.</p>
+<p><strong>Current status: designed, not yet piloted.</strong> No formal learner-outcome data or controlled evaluation is presented here. A facilitated pilot could examine whether participants identify unsupported claims, consider constraints and alternatives, and explain how their reasoning changed or remained stable.</p>
+</section>
+<section class="wrap section-border" id="reflection"><span class="eyebrow">Reflection</span><h2>The most important output is a reasoned decision</h2>
+<p>The case intentionally avoids rewarding one recommendation. “Enrol,” “don't enrol yet,” and “it depends” can each be defensible when supported by appropriate evidence and clear acknowledgement of uncertainty. The instructional aim is to help learners ask better questions before committing time and money.</p>
+<p>For me, the central design lesson is that autonomy does not mean leaving learners unsupported: optional leads, visible evidence, and reflective prompts can create structure without taking ownership of the decision away from the learner.</p>
+<div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.6rem;"><a class="btn" href="files/The_Evidence_Room_Interactive.html" target="_blank" rel="noopener">Try The Evidence Room ↗</a><a class="btn btn-quiet" href="../projects.html">Back to projects</a></div>
+</section>
+</main>
+<footer class="site-footer"><div class="wrap"><p>© 2026 Nicoleta Malaki</p><p><a href="../contact.html">Get in touch</a></p></div></footer><script src="../script.js"></script></body></html>
